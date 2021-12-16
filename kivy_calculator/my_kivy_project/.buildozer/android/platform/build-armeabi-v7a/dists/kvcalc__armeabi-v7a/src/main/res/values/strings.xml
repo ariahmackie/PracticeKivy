@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">KvCalc</string>
+    <string name="private_version">f2b707a3d7992e304cbb6e323e44062f0f1ff7cc</string>
+    <string name="presplash_color">#000000</string>
+    <string name="urlScheme">kivy</string>
+</resources>

@@ -1,0 +1,18 @@
+<Progress_Bar>
+    BoxLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Label:
+            id: xp_label
+            text: "XP"
+
+        ProgressBar:
+            id: xp_progress_bar
+            min: 0
+            max: 15
+            pos_hint: {'x': .1}
+            size_hint_x: .8
+        Button:
+            text: "Press to accomplish task"
+            on_press: root.complete_task()
