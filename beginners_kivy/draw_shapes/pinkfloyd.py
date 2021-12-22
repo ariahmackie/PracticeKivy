@@ -5,15 +5,15 @@ from kivy.uix.relativelayout import RelativeLayout
 
 
 
-class AlbumnLayout(RelativeLayout):
+class AlbumLayout(RelativeLayout):
 	pass
 
 
 
-class AlbumnCover(App):
+class AlbumCover(App):
 	def build(self):
-		return AlbumnLayout()
+		return AlbumLayout()
 
 if __name__ == "__main__":
-	cover = AlbumnCover()
+	cover = AlbumCover()
 	cover.run()

@@ -2,13 +2,14 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.properties import ObjectProperty
 from kivy.core.window import Window
-
+from kivy.graphics import Triangle
 Window.clearcolor = (0.247, 0.854, 0.952, 1)
 
 class HouseRoof(Widget):
-    triangle = ObjectProperty(None)
     def __init__(self, **kwargs):
-        self.triangle = Triangle(points = [ 0, 0, 100, 100, 200, 0] )
+        with self.canvas:
+            Color(0.2, 0.8, 0)
+
 
 
 class House(Widget):
