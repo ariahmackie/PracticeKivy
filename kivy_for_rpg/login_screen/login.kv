@@ -1,0 +1,38 @@
+<LoginScreen>:
+    Widget:
+        pos_hint: {'x': 0 , 'y': 0.60}
+        size_hint: 1, 0.40
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+            Ellipse:
+                pos: self.center_x - 110, self.center_y - 110
+                size: 220, 220
+                source: 'purplegradient.png'
+            Rectangle:
+                pos: self.center_x - 70, self.center_y - 70
+                size: 140, 140
+                source: 'sword.png'
+    Widget:
+        pos_hint: {'x': 0, 'y' : 0}
+        size_hint: 1, 0.6
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                size: self.size
+                pos: self.pos
+    Widget:
+        pos_hint: {'center_x': 0.5, 'y': 0.4}
+        size_hint_x: 0.7
+        height: 52
+        MDTextFieldRect:
+            hint_text: "Username"
+            multiline: False
+            foreground_color:(1, 1, 1, 1)
+            background_color: (1, 1, 1, 1)
+            size: self.size
+            pos: self.pos
