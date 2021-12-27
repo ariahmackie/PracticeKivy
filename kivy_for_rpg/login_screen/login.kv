@@ -25,14 +25,28 @@
             Rectangle:
                 size: self.size
                 pos: self.pos
-    Widget:
-        pos_hint: {'center_x': 0.5, 'y': 0.4}
-        size_hint_x: 0.7
-        height: 52
-        MDTextFieldRect:
-            hint_text: "Username"
+
+    FloatLayout:
+        size: root.width, root.height
+        TextInput:
+            hint_text: "username"
             multiline: False
-            foreground_color:(1, 1, 1, 1)
-            background_color: (1, 1, 1, 1)
-            size: self.size
-            pos: self.pos
+            size_hint: 0.8, 0.05
+            font_size: 26
+            background_normal : ''
+            background_color: 1, 1, 1, 1
+            pos_hint: {"x": 0.1, "top": 0.45}
+        TextInput:
+            hint_text: "password"
+            multiline: False
+            size_hint: 0.8, 0.05
+            font_size: 26
+            background_normal: ''
+            background_color: 1, 1, 1, 1
+            pos_hint: {"x": 0.1, "top": 0.30}
+        Button:
+            text: "Login"
+            size_hint: 0.8, 0.08
+            pos_hint: {"center_x": 0.5, "top": 0.15}
+            background_normal: ''
+            background_color: 0.38, 0.92, 1, 0.8
