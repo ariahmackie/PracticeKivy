@@ -10,9 +10,15 @@ class LoginScreen(FloatLayout):
     pass
 
 
-class LoginApp(App):
+class LoginApp(MDApp):
     def build(self):
         return LoginScreen()
+
+    def process(self):
+        email = self.root.ids.email.text
+        password = self.root.ids.password.text
+        print(email)
+        print(password)
 
 
 if __name__ == "__main__":

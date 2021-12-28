@@ -9,8 +9,8 @@
                 size: self.size
                 pos: self.pos
             Ellipse:
-                pos: self.center_x - 110, self.center_y - 110
-                size: 220, 220
+                pos: self.center_x - 130, self.center_y - 130
+                size: 260, 260
                 source: 'purplegradient.png'
             Rectangle:
                 pos: self.center_x - 70, self.center_y - 70
@@ -29,24 +29,47 @@
     FloatLayout:
         size: root.width, root.height
         TextInput:
-            hint_text: "username"
+            id: email
+            hint_text: "email"
             multiline: False
-            size_hint: 0.8, 0.05
+            size_hint: 0.8, 0.08
             font_size: 26
             background_normal : ''
             background_color: 1, 1, 1, 1
-            pos_hint: {"x": 0.1, "top": 0.45}
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.45}
+            padding_y: [12, 10]
         TextInput:
+            id: password
             hint_text: "password"
             multiline: False
-            size_hint: 0.8, 0.05
+            size_hint: 0.8, 0.08
             font_size: 26
             background_normal: ''
             background_color: 1, 1, 1, 1
-            pos_hint: {"x": 0.1, "top": 0.30}
+            hint_text_color:  0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.32}
+            padding_y: [12, 10]
         Button:
             text: "Login"
-            size_hint: 0.8, 0.08
-            pos_hint: {"center_x": 0.5, "top": 0.15}
+            size_hint: 0.6, 0.08
+            font_size: 26
+            pos_hint: {"center_x": 0.5, "top": 0.28}
             background_normal: ''
-            background_color: 0.38, 0.92, 1, 0.8
+            background_color: 0.40, 1, 1, 1
+            color: 0, 0, 0, 1
+            on_release: app.process()
+        MDTextButton:
+            text: "Forgot password?"
+            color: 1, 1, 1, 1
+            font_size: 18
+            pos_hint: {"center_x": 0.5, "y": 0.1}
+        MDTextButton:
+            text: "Create Account"
+            color: 1, 1, 1, 1
+            font_size: 18
+            pos_hint: {"center_x": 0.5, "y": 0.05}
