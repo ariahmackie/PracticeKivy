@@ -4,9 +4,13 @@ from kivy.uix.label import Label
 from kivymd.app import MDApp
 from kivy.core.window import Window
 
+
 Window.size = (400,800)
 
 class LoginScreen(FloatLayout):
+    pass
+
+class HomeScreen(FloatLayout):
     pass
 
 
