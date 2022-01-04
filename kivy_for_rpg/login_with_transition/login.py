@@ -5,7 +5,8 @@ from kivymd.app import MDApp
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.lang import Builder
-
+from kivy.uix.scrollview import ScrollView
+from kivy.uix.boxlayout import BoxLayout
 
 Window.size = (400,800)
 
