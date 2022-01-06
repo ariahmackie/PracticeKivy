@@ -135,18 +135,34 @@
     Widget:
         pos_hint: { "x": 0.04, "y": 0.04}
         size_hint: 0.92, 0.65
-        BoxLayout:
-            orientation: 'vertical'
+        GridLayout:
+            cols: 1
             pos: self.parent.x + 9, self.parent.y +8
             size: self.parent.width - 16, self.parent.height - 16
             padding: 10, 10
-            Button:
-                text: "a"
-            Button:
-                text: "b"
-            Button:
-                text: "c"
-            Button:
-                text: "d"
-            Button:
-                text: "e"
+            ScrollView:
+                direction: 'vertical'
+                pos: self.parent.x, self.parent.y
+                size: self.parent.width, self.parent.height
+                GridLayout:
+                    cols: 1
+                    size_hint_y: None
+                    padding: 10
+                    size: self.parent.width, self.parent.height
+                    Button:
+                        size_hint_y: 2
+                        text: "a"
+                    Button:
+                        text: "b"
+                    Button:
+                        text: "c"
+                    Button:
+                        text: "d"
+                    Button:
+                        text: "e"
+                    Button:
+                        text: "f"
+                    Button:
+                        text: "g"
+                    Button:
+                        text: "m"
