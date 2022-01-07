@@ -6,9 +6,12 @@ from kivy.uix.gridlayout import GridLayout
 class MyGridLayout(GridLayout):
     pass
 
+class Layout2(GridLayout):
+    pass
+
 class GridApp(App):
     def build(self):
-        return MyGridLayout()
+        return Layout2()
 
 
 
