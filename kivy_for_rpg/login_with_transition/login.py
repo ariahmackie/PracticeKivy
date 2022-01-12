@@ -17,7 +17,6 @@ class Home(Screen):
     pass
 
 
-
 #presentation = Builder.load_file("login.kv")
 
 class LoginApp(MDApp):
@@ -33,7 +32,6 @@ class LoginApp(MDApp):
         print(email)
         print(password)
         sm.current = "home"
-
 
 if __name__ == "__main__":
     LoginApp().run()

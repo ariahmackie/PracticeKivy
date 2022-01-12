@@ -132,37 +132,44 @@
                 pos: self.pos
                 size: self.size
 
-    Widget:
-        pos_hint: { "x": 0.04, "y": 0.04}
-        size_hint: 0.92, 0.65
+
+    ScrollView:
+        do_scroll_x: False
+        do_scroll_y: True
         GridLayout:
             cols: 1
-            pos: self.parent.x + 9, self.parent.y +8
-            size: self.parent.width - 16, self.parent.height - 16
-            padding: 10, 10
-            ScrollView:
-                direction: 'vertical'
-                pos: self.parent.x, self.parent.y
-                size: self.parent.width, self.parent.height
-                GridLayout:
-                    cols: 1
-                    size_hint_y: None
-                    padding: 10
-                    size: self.parent.width, self.parent.height
-                    Button:
-                        size_hint_y: 2
-                        text: "a"
-                    Button:
-                        text: "b"
-                    Button:
-                        text: "c"
-                    Button:
-                        text: "d"
-                    Button:
-                        text: "e"
-                    Button:
-                        text: "f"
-                    Button:
-                        text: "g"
-                    Button:
-                        text: "m"
+            spacing: 5
+            size_hint_y: None
+
+            Button:
+                size_hint_y: None
+                height: 80
+                text: "a"
+            Button:
+                size_hint_y: None
+                height: 80
+                text: "b"
+            Button:
+                size_hint_y: None
+                height: 80
+                text: "c"
+            Button:
+                size_hint_y: None
+                height: 80
+                text: "d"
+            Button:
+                size_hint_y: None
+                height: 80
+                text: "e"
+            Button:
+                size_hint_y: None
+                height: 80
+                text: "f"
+            Button:
+                size_hint_y: None
+                height: 80
+                text: "g"
+            Button:
+                size_hint_y: None
+                height: 80
+                text: "m"
