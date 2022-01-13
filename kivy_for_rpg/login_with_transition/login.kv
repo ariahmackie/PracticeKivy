@@ -107,10 +107,10 @@
                 pos: self.pos
                 size: self.size
                 source: 'list.png'
-
+# user image
     Widget:
-        pos_hint: {"x": 0.08, "y": 0.75}
-        size_hint: 0.33, 0.15
+        pos_hint: {"x": 0.08, "center_y": 0.82}
+        size_hint: 0.3, 0.15
         canvas:
             Color:
                 rgb: 0.494, 0, 0.592
@@ -132,44 +132,57 @@
                 pos: self.pos
                 size: self.size
 
-
-    ScrollView:
-        do_scroll_x: False
-        do_scroll_y: True
-        GridLayout:
-            cols: 1
-            spacing: 5
-            size_hint_y: None
-
-            Button:
+# list background
+    FloatLayout:
+        pos_hint: {"center_x": 0.5, "y": 0.10}
+        size_hint: 1, 0.55
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                pos: self.pos
+                size: self.size
+# list buttons
+    FloatLayout:
+        pos_hint: {"center_x": 0.5, "y": 0.10}
+        size_hint: 0.8, 0.60
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            GridLayout:
+                pos_hint: {"center_x" : 0.5, "y": 0.1}
+                cols: 1
+                spacing: 5
                 size_hint_y: None
-                height: 80
-                text: "a"
-            Button:
-                size_hint_y: None
-                height: 80
-                text: "b"
-            Button:
-                size_hint_y: None
-                height: 80
-                text: "c"
-            Button:
-                size_hint_y: None
-                height: 80
-                text: "d"
-            Button:
-                size_hint_y: None
-                height: 80
-                text: "e"
-            Button:
-                size_hint_y: None
-                height: 80
-                text: "f"
-            Button:
-                size_hint_y: None
-                height: 80
-                text: "g"
-            Button:
-                size_hint_y: None
-                height: 80
-                text: "m"
+                Button:
+                    size_hint_y: None
+                    height: 80
+                    text: "a"
+                Button:
+                    size_hint_y: None
+                    height: 80
+                    text: "b"
+                Button:
+                    size_hint_y: None
+                    height: 80
+                    text: "c"
+                Button:
+                    size_hint_y: None
+                    height: 80
+                    text: "d"
+                Button:
+                    size_hint_y: None
+                    height: 80
+                    text: "e"
+                Button:
+                    size_hint_y: None
+                    height: 80
+                    text: "f"
+                Button:
+                    size_hint_y: None
+                    height: 80
+                    text: "g"
+                Button:
+                    size_hint_y: None
+                    height: 80
+                    text: "m"

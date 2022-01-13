@@ -8,7 +8,7 @@ from kivy.uix.button import Button
 class Screen(GridLayout):
     pass
 
-
+# this does scrolling with buttons
 class ScrollClass(App):
     def build(self):
         Buttonlayout = GridLayout(cols=1, spacing=2, size_hint_y=None)
