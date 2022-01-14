@@ -1,0 +1,45 @@
+ScreenManagement:
+    Login:
+    Home:
+    Profile:
+
+
+<Login>
+    name: "login"
+    BoxLayout:
+        Button:
+            text: "login"
+            background_color: 0, 0, 1, 1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.current = 'home'
+
+<Home>:
+    name :"home"
+    BoxLayout:
+        Button:
+            text: "Log out"
+            background_color: 1 , 0.8, 0.2, 1
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current =  'login'
+
+        Button:
+            text: "profile"
+            background_color: 0.8, 0, 0.2, 1
+            on_press:
+                root.manager.transition.direction = "right"
+                root.manager.transition.duration = 2
+                root.manager.current = 'profile'
+
+<Profile>
+    name : "profile"
+    BoxLayout:
+        Button:
+            text: "back to home"
+            background_color: 1, 0, 1, 1
+            on_press:
+                root.manager.transition.direction = "left"
+                root.manager.transition.duration = 1
+                root.manager.current = "home"

@@ -1,0 +1,56 @@
+
+<MyGridLayout>:
+    # you need to state number or rows or columns or both
+    cols: 3
+    rows: 2
+    # use row_roce default with row_default height
+    row_force_default: True # ignore force the layout to ignore the width and size_hint properties of children
+    #col_force_default: True
+    row_default_height: 40 #height of rows
+    col_default_width: 40
+    Button:
+        text: "q"
+        size_hint_x: None
+        width: 100
+    Button:
+        text: "w"
+    Button:
+        text: "e"
+    Button:
+        text: "r"
+        size_hint_x: None
+        width: 100
+    Button:
+
+        text: "t"
+    Button:
+        text: "y"
+
+<Layout2>:
+    cols: 4
+    rows: 2
+    spacing: [100, 100]
+    padding: [10, 10]
+    row_force_default: True
+    row_default_height: 50
+    Button:
+        text: "hello1"
+        size_hint_x: None
+        width: 100
+
+    Button:
+        text: "hello2"
+    Button:
+        text: "hello3"
+    Button:
+        text: "hello4"
+    Button:
+        text: "hello5"
+        size_hint_x: None
+        width: 100
+    Button:
+        text: "hello6"
+    Button:
+        text: "hello7"
+    Button:
+        text: "hello8"

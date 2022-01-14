@@ -1,0 +1,48 @@
+# You can nest boxlayout
+
+<MyLayout>:
+    orientation: 'vertical'
+    padding: [10, 10, 10, 10]
+    spacing: 10
+    Button:
+        text: "A"
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: 20
+        Button:
+            text: "B"
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: 30
+            Button:
+                text: "C"
+            BoxLayout:
+                orientation: 'horizontal'
+                spacing: 40
+                Button:
+                    text: "D"
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: 50
+                    Button:
+                        text: "E"
+                    BoxLayout:
+                        orientation: 'horizontal'
+                        spacing: 60
+                        Button:
+                            text: "F"
+                        BoxLayout:
+                            orientation: "vertical"
+                            spacing: 70
+                            Button:
+                                text: "G"
+                            BoxLayout:
+                                orientation: "horizontal"
+                                spacing: 80
+                                Button:
+                                    text: "H"
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    spacing: 90
+                                    Button:
+                                        text: "I"
