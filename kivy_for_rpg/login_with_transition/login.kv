@@ -142,47 +142,32 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-# list buttons
+# list buttonspos_hint: {"center_x": 0.5, "y": 0.1}
+
     FloatLayout:
         pos_hint: {"center_x": 0.5, "y": 0.10}
-        size_hint: 0.8, 0.60
+        size_hint: 0.85, 0.48
         ScrollView:
+            pos_hint: {"center_x": 0.5, "y": 0.10}
             do_scroll_x: False
             do_scroll_y: True
             GridLayout:
-                pos_hint: {"center_x" : 0.5, "y": 0.1}
                 cols: 1
-                spacing: 5
+                spacing: 10
                 size_hint_y: None
                 Button:
+                    background_normal: ''
+                    background_color: 1, 1, 1, 1
                     size_hint_y: None
-                    height: 80
+                    height: 70
                     text: "a"
+                    MDCheckbox:
+                        active: False
+                        pos_hint: {"x": 0.3, 'center_y': 0.5}
+
                 Button:
+                    background_normal: ''
+                    background_color: 1, 1, 1, 1
                     size_hint_y: None
-                    height: 80
+                    height: 70
                     text: "b"
-                Button:
-                    size_hint_y: None
-                    height: 80
-                    text: "c"
-                Button:
-                    size_hint_y: None
-                    height: 80
-                    text: "d"
-                Button:
-                    size_hint_y: None
-                    height: 80
-                    text: "e"
-                Button:
-                    size_hint_y: None
-                    height: 80
-                    text: "f"
-                Button:
-                    size_hint_y: None
-                    height: 80
-                    text: "g"
-                Button:
-                    size_hint_y: None
-                    height: 80
-                    text: "m"
