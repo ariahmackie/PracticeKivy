@@ -89,14 +89,17 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
+    # main background
     Widget:
-        pos_hint: { "center_x": 0.5, "center_y": 0.5}
-        size_hint: 0.92, 0.95
-        canvas:
-            Rectangle:
-                pos: self.pos
-                size: self.size
-                source: "purplegradient.png"
+        pos_hint: {"x": 0.1, "y": 0.9}
+        size_hint: 0.2, 0.2
+        Image:
+            pos_hint: {"x": 0.1, "y": 0.8}
+            size_hint: 1, 1
+            source: "purplegradient.png"
+
+
+    # menu button
     Widget:
         pos_hint: {"x": 0.05, "y": 0.92}
         size_hint: 0.1, 0.05
@@ -122,9 +125,10 @@
             Rectangle:
                 pos: self.x + 8, self.y + 8
                 size: self.width - 16, self.height - 16
+    # progress
     Widget:
-        pos_hint: { "x": 0.45, "y": 0.70}
-        size_hint: 0.45, 0.25
+        pos_hint: { "x": 0.45, "y": 0.74}
+        size_hint: 0.45, 0.20
         canvas:
             Color:
                 rgb: 1, 1, 1
@@ -135,39 +139,37 @@
 # list background
     FloatLayout:
         pos_hint: {"center_x": 0.5, "y": 0.10}
-        size_hint: 1, 0.55
+        size_hint: 1, 0.62
         canvas:
             Color:
                 rgb: 0.494, 0, 0.592
             Rectangle:
                 pos: self.pos
                 size: self.size
-# list buttonspos_hint: {"center_x": 0.5, "y": 0.1}
+
 
     FloatLayout:
         pos_hint: {"center_x": 0.5, "y": 0.10}
-        size_hint: 0.85, 0.48
+        size_hint: 0.94, 0.54
         ScrollView:
             pos_hint: {"center_x": 0.5, "y": 0.10}
             do_scroll_x: False
             do_scroll_y: True
             GridLayout:
                 cols: 1
-                spacing: 10
+                spacing: 6
                 size_hint_y: None
                 Button:
-                    background_normal: ''
+                    background_normal: 'checklist.png'
                     background_color: 1, 1, 1, 1
+                    background_down: 'checklist.png'
                     size_hint_y: None
-                    height: 70
+                    height: 80
                     text: "a"
-                    MDCheckbox:
-                        active: False
-                        pos_hint: {"x": 0.3, 'center_y': 0.5}
-
                 Button:
-                    background_normal: ''
+                    background_normal: 'checklist.png'
+                    background_down: 'checklist.png'
                     background_color: 1, 1, 1, 1
                     size_hint_y: None
-                    height: 70
+                    height: 80
                     text: "b"
