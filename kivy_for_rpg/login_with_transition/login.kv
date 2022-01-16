@@ -89,14 +89,31 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-    # main background
+    # main background (top)
     Widget:
-        pos_hint: {"x": 0.1, "y": 0.9}
-        size_hint: 0.2, 0.2
-        Image:
-            pos_hint: {"x": 0.1, "y": 0.8}
-            size_hint: 1, 1
-            source: "purplegradient.png"
+        pos_hint: {"center_x": 0.5, "y": 0.7}
+        size_hint: 0.92, 0.28
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "purplegradient2.png"
+      # main background (bottom)
+    Widget:
+        pos_hint: {"center_x": 0.5, "y": 0.02}
+        size_hint: 0.9, 0.10
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "purplegradient2.png"
+
+
+
 
 
     # menu button
@@ -135,11 +152,18 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-
+            Rectangle:
+                source: "heart.png"
+                pos: self.x + 5, self.y + 100
+                size:40, 35
+            Rectangle:
+                source: "star.png"
+                pos: self.x + 5, self.y + 30
+                size: 40, 40
 # list background
     FloatLayout:
         pos_hint: {"center_x": 0.5, "y": 0.10}
-        size_hint: 1, 0.62
+        size_hint: 1, 0.60
         canvas:
             Color:
                 rgb: 0.494, 0, 0.592
@@ -166,6 +190,8 @@
                     size_hint_y: None
                     height: 80
                     text: "a"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
                 Button:
                     background_normal: 'checklist.png'
                     background_down: 'checklist.png'
@@ -173,3 +199,5 @@
                     size_hint_y: None
                     height: 80
                     text: "b"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
