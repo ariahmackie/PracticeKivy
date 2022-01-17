@@ -1,0 +1,211 @@
+
+<Login>:
+    name : "login"
+    Widget:
+        pos_hint: {'x': 0 , 'y': 0.60}
+        size_hint: 1, 0.40
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+            Ellipse:
+                pos: self.center_x - 130, self.center_y - 130
+                size: 260, 260
+                source: 'purplegradient.png'
+            Rectangle:
+                pos: self.center_x - 70, self.center_y - 70
+                size: 140, 140
+                source: 'sword.png'
+    Widget:
+        pos_hint: {'x': 0, 'y' : 0}
+        size_hint: 1, 0.6
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+    FloatLayout:
+        size: root.width, root.height
+        TextInput:
+            id: email
+            hint_text: "email"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal : ''
+            background_color: 1, 1, 1, 1
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.45}
+            padding_y: [12, 10]
+        TextInput:
+            id: password
+            hint_text: "password"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal: ''
+            background_color: 1, 1, 1, 1
+            hint_text_color:  0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.35}
+            padding_y: [12, 10]
+        Button:
+            text: "Login"
+            size_hint: 0.45, 0.06
+            font_size: 24
+            pos_hint: {"center_x": 0.5, "top": 0.30}
+            background_normal: ''
+            background_color: 0.40, 1, 1, 1
+            color: 0, 0, 0, 1
+            on_release:
+                root.manager.current = 'home'
+
+        MDTextButton:
+            text: "Forgot password?"
+            color: 1, 1, 1, 1
+            font_size: 18
+            pos_hint: {"center_x": 0.5, "y": 0.1}
+        MDTextButton:
+            text: "Create Account"
+            color: 1, 1, 1, 1
+            font_size: 18
+            pos_hint: {"center_x": 0.5, "y": 0.06}
+
+<Home>
+    name: "home"
+    Widget:
+        pos_hint: {"x": 0, "y": 0}
+        size_hint: 1, 1
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    # main background (top)
+    Widget:
+        pos_hint: {"center_x": 0.5, "y": 0.7}
+        size_hint: 0.92, 0.28
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "purplegradient2.png"
+      # main background (bottom)
+    Widget:
+        pos_hint: {"center_x": 0.5, "y": 0.02}
+        size_hint: 0.9, 0.10
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "purplegradient2.png"
+
+
+
+
+
+    # menu button
+    Widget:
+        pos_hint: {"x": 0.05, "y": 0.92}
+        size_hint: 0.1, 0.05
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'list.png'
+# user image
+    Widget:
+        pos_hint: {"x": 0.08, "center_y": 0.82}
+        size_hint: 0.3, 0.15
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                pos: self.x + 8, self.y + 8
+                size: self.width - 16, self.height - 16
+    # progress
+    Widget:
+        pos_hint: { "x": 0.45, "y": 0.74}
+        size_hint: 0.45, 0.20
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Rectangle:
+                source: "heart.png"
+                pos: self.x + 5, self.y + 100
+                size:40, 35
+            Rectangle:
+                source: "star.png"
+                pos: self.x + 5, self.y + 30
+                size: 40, 40
+        MDProgressBar:
+            pos_hint: {"x": 0.45, "y" : 0.74}
+            width: "100dp"
+            id: health_bar
+            max: 100
+            value: 20
+            color: .494, 0.8, 0.592
+
+# list background
+    FloatLayout:
+        pos_hint: {"center_x": 0.5, "y": 0.10}
+        size_hint: 1, 0.60
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+    FloatLayout:
+        pos_hint: {"center_x": 0.5, "y": 0.10}
+        size_hint: 0.94, 0.54
+        ScrollView:
+            pos_hint: {"center_x": 0.5, "y": 0.10}
+            do_scroll_x: False
+            do_scroll_y: True
+            GridLayout:
+                cols: 1
+                spacing: 6
+                size_hint_y: None
+                Button:
+                    background_normal: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    background_down: 'checklist.png'
+                    size_hint_y: None
+                    height: 80
+                    text: "a"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_down: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    size_hint_y: None
+                    height: 80
+                    text: "b"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
