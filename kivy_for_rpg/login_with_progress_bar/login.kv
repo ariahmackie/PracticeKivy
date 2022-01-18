@@ -89,10 +89,24 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
+
+
+
+
     # main background (top)
     Widget:
-        pos_hint: {"center_x": 0.5, "y": 0.7}
-        size_hint: 0.92, 0.28
+        pos_hint: {"center_x": 0.5, "center_y": 0.84}
+        size_hint: 0.93, 0.28
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle
+                pos: self.pos
+                size: self.size
+
+    Widget:
+        pos_hint: {"center_x": 0.5, "center_y": 0.84}
+        size_hint: 0.91, 0.27
         canvas:
             Color:
                 rgba: 1, 1, 1, 1
@@ -100,10 +114,22 @@
                 pos: self.pos
                 size: self.size
                 source: "purplegradient3.png"
+
+
       # main background (bottom)
     Widget:
-        pos_hint: {"center_x": 0.5, "y": 0.02}
-        size_hint: 0.9, 0.10
+        pos_hint: {"center_x": 0.5, "center_y": 0.06}
+        size_hint: 0.93, 0.08
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+    Widget:
+        pos_hint: {"center_x": 0.5, "center_y": 0.06}
+        size_hint: 0.91, 0.07
         canvas:
             Color:
                 rgba: 1, 1, 1, 1
@@ -200,8 +226,8 @@
             text: "Coins:"
 # list background
     FloatLayout:
-        pos_hint: {"center_x": 0.5, "y": 0.10}
-        size_hint: 1, 0.60
+        pos_hint: {"center_x": 0.5, "center_y": 0.45}
+        size_hint: 1, 0.43
         canvas:
             Color:
                 rgb: 0.494, 0, 0.592
@@ -211,22 +237,22 @@
 
 
     FloatLayout:
-        pos_hint: {"center_x": 0.5, "y": 0.10}
-        size_hint: 0.94, 0.54
+        pos_hint: {"center_x": 0.5, "center_y": 0.35}
+        size_hint: 0.94, 0.55
         ScrollView:
             pos_hint: {"center_x": 0.5, "y": 0.10}
             do_scroll_x: False
             do_scroll_y: True
             GridLayout:
                 cols: 1
-                spacing: 5
+                spacing: 3
                 size_hint_y: None
                 Button:
                     background_normal: 'checklist.png'
                     background_color: 1, 1, 1, 1
                     background_down: 'checklist.png'
                     size_hint_y: None
-                    height: 80
+                    height: 75
                     text: "a"
                     font_size: 24
                     color: 0.349, 0.298, 0.722
@@ -235,7 +261,43 @@
                     background_down: 'checklist.png'
                     background_color: 1, 1, 1, 1
                     size_hint_y: None
-                    height: 80
+                    height: 75
+                    text: "b"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    background_down: 'checklist.png'
+                    size_hint_y: None
+                    height: 75
+                    text: "a"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_down: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    size_hint_y: None
+                    height: 75
+                    text: "b"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    background_down: 'checklist.png'
+                    size_hint_y: None
+                    height: 75
+                    text: "a"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_down: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    size_hint_y: None
+                    height: 75
                     text: "b"
                     font_size: 24
                     color: 0.349, 0.298, 0.722
