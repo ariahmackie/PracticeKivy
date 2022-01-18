@@ -99,7 +99,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source: "purplegradient2.png"
+                source: "purplegradient3.png"
       # main background (bottom)
     Widget:
         pos_hint: {"center_x": 0.5, "y": 0.02}
@@ -110,7 +110,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source: "purplegradient2.png"
+                source: "purplegradient3.png"
 
 
     # menu button
@@ -152,29 +152,52 @@
                 size: self.size
             Rectangle:
                 source: "heart.png"
-                pos: self.x + 5, self.y + 100
+                pos: self.x + 5, self.y + 110
                 size:40, 35
             Rectangle:
                 source: "star.png"
-                pos: self.x + 5, self.y + 30
+                pos: self.x + 5, self.y + 40
                 size: 40, 40
 
     FloatLayout:
+        Label:
+            pos_hint: {'x': 0.7, "y": 0.82}
+            text: "health"
+            color: 0.494, 0, 0.592
+            size_hint: (0.25, 0.1)
+            font_size: 16
         MDProgressBar:
-            id: health
-            pos_hint: {'x': 0.58, 'y': 0.83}
+            id: health_bar
+            pos_hint: {'x': 0.58, 'y': 0.84}
             size_hint: (0.25, 0.1)
             max: 100
             value: 20
             color: 0.494, 0, 0.592
+        Label:
+            pos_hint: {'x': 0.7, "y": 0.75}
+            size_hint: ( 0.25, 0.1)
+            font_size: 16
+            text: "XP"
+            color: 0.349, 0.298, 0.722
         MDProgressBar:
-            id: health
-            pos_hint: {'x': 0.58, 'y': 0.75}
+            id: xp_bar
+            pos_hint: {'x': 0.58, 'y': 0.77}
             size_hint: (0.25, 0.1)
             max: 100
             value: 30
             color: 0.349, 0.298, 0.722
-
+        Label:
+            pos_hint: {'x': 0.4, "y": 0.71}
+            size_hint: (0.25, 0.1)
+            font_size: 16
+            color: 0.349, 0.298, 0.722
+            text: "Level:"
+        Label:
+            pos_hint: {'x': 0.6, "y": 0.71}
+            size_hint: (0.25, 0.1)
+            font_size: 16
+            color: 0.349, 0.298, 0.722
+            text: "Coins:"
 # list background
     FloatLayout:
         pos_hint: {"center_x": 0.5, "y": 0.10}
@@ -196,7 +219,7 @@
             do_scroll_y: True
             GridLayout:
                 cols: 1
-                spacing: 6
+                spacing: 5
                 size_hint_y: None
                 Button:
                     background_normal: 'checklist.png'
