@@ -113,9 +113,6 @@
                 source: "purplegradient2.png"
 
 
-
-
-
     # menu button
     Widget:
         pos_hint: {"x": 0.05, "y": 0.92}
@@ -142,6 +139,7 @@
             Rectangle:
                 pos: self.x + 8, self.y + 8
                 size: self.width - 16, self.height - 16
+
     # progress
     Widget:
         pos_hint: { "x": 0.45, "y": 0.74}
@@ -160,13 +158,22 @@
                 source: "star.png"
                 pos: self.x + 5, self.y + 30
                 size: 40, 40
+
+    FloatLayout:
         MDProgressBar:
-            pos_hint: {"x": 0.45, "y" : 0.74}
-            width: "100dp"
-            id: health_bar
+            id: health
+            pos_hint: {'x': 0.58, 'y': 0.83}
+            size_hint: (0.25, 0.1)
             max: 100
             value: 20
-            color: .494, 0.8, 0.592
+            color: 0.494, 0, 0.592
+        MDProgressBar:
+            id: health
+            pos_hint: {'x': 0.58, 'y': 0.75}
+            size_hint: (0.25, 0.1)
+            max: 100
+            value: 30
+            color: 0.349, 0.298, 0.722
 
 # list background
     FloatLayout:
