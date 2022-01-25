@@ -23,20 +23,22 @@ class Login(Screen):
 
 class Home(Screen):
     pass
+
+class ForgotPassword(Screen):
+    pass
 sm = ScreenManager(transition = NoTransition())
 sm.add_widget(Login(name='login'))
 sm.add_widget(Home(name='home'))
+
 class LoginApp(MDApp):
     def build(self):
         self.sm = ScreenManager(transition = NoTransition())
         self.sm.add_widget(Login(name='login'))
         self.sm.add_widget(Home(name='home'))
+        self.sm.add_widget(ForgotPassword(name = 'forgotpassword'))
         return self.sm
 
     def read_login_input(self,email, password):
-        print("submitted log in")
-        print(email)
-        print(password)
         self.validate_password(email, password)
 
     def validate_password(self, email, password):
@@ -54,11 +56,11 @@ class LoginApp(MDApp):
 
     def password_error_message(self):
         warning = Label(text = '[color=ff3333]Wrong password.[/color]', markup = True, pos = (270, 270), size = (50, 50), size_hint = (None, None)  )
-        #with warning.canvas:
-        #    Color(1, 1, 1, 1)
-        #    Rectangle(pos= warning.pos, size = warning.size)
         self.sm.current_screen.add_widget(warning)
-        # sm.current = "home"
+
+    def forgotpassword(self):
+        self.sm.current = 'forgotpassword'
+
 
 if __name__ == "__main__":
     LoginApp().run()
