@@ -11,7 +11,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 from Model.helpers import login_helper as lh
 from Model.helpers import dummy_players as dp
-
+from kivy.graphics import Rectangle, Color
 Window.size = (400,800)
 player1 = dp.create_test_user1()
 player2 = dp.create_test_user2()
@@ -47,12 +47,17 @@ class LoginApp(MDApp):
                 self.sm.current = "home"
             else:
                 print("incorrect password")
-                warning = Label(text = '[color=ff3333]Wrong password.[/color]', markup = True )
-                self.sm.current_screen.add_widget(warning)
+                self.password_error_message()
+
         else:
             print("alert. Is not registered email.")
 
-
+    def password_error_message(self):
+        warning = Label(text = '[color=ff3333]Wrong password.[/color]', markup = True, pos = (270, 270), size = (50, 50), size_hint = (None, None)  )
+        #with warning.canvas:
+        #    Color(1, 1, 1, 1)
+        #    Rectangle(pos= warning.pos, size = warning.size)
+        self.sm.current_screen.add_widget(warning)
         # sm.current = "home"
 
 if __name__ == "__main__":
