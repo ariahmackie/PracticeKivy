@@ -26,6 +26,10 @@ class Home(Screen):
 
 class ForgotPassword(Screen):
     pass
+
+class PassCodeSubmission(Screen):
+    pass
+
 sm = ScreenManager(transition = NoTransition())
 sm.add_widget(Login(name='login'))
 sm.add_widget(Home(name='home'))
@@ -36,6 +40,7 @@ class LoginApp(MDApp):
         self.sm.add_widget(Login(name='login'))
         self.sm.add_widget(Home(name='home'))
         self.sm.add_widget(ForgotPassword(name = 'forgotpassword'))
+        self.sm.add_widget(PassCodeSubmission(name = 'passcodesubmission'))
         return self.sm
 
     def read_login_input(self,email, password):
@@ -50,7 +55,6 @@ class LoginApp(MDApp):
             else:
                 print("incorrect password")
                 self.password_error_message()
-
         else:
             print("alert. Is not registered email.")
 
@@ -60,6 +64,14 @@ class LoginApp(MDApp):
 
     def forgotpassword(self):
         self.sm.current = 'forgotpassword'
+
+    def passcodesubmission(self, email):
+        player = lh.get_registered_player_via_email(email, players)
+        if player != 0:
+            print("trying to send passcode")
+            self.sm.current = 'passcodesubmission'
+            lh.email_passcode(email)
+            
 
 
 if __name__ == "__main__":

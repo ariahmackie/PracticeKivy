@@ -21,7 +21,7 @@ def is_correctpassword(CURRENT_PLAYER, password): #createaccount_login_forgot_pa
     else:
         return False
 
-def email_passcode(players): #createaccount_login_forgot_password helpers
+def email_passcode_1(players): #createaccount_login_forgot_password helpers
     receiver_address = str(raw_input("Please type your email >"))
     player = get_registered_player_via_email(receiver_address, players)
     if player != 0:
@@ -34,7 +34,12 @@ def email_passcode(players): #createaccount_login_forgot_password helpers
     else:
         print("Sorry. That email doesn't exist in the database")
 
-
+def email_passcode(email):
+    receiver_address = email
+    passcode = generate_five_digit_passcode()
+    newemail = Email(receiver_address, "Passcode", str(passcode))
+    newemail.send()
+    
 def generate_five_digit_passcode(): #createaccount_login_forgot_password helpers
     passcode = random.randint(00000, 99999)
     return passcode
