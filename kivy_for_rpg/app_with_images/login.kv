@@ -361,27 +361,51 @@
 
 <PassCodeSubmission>:
     name: 'passcodesubmission'
-    Label:
-        text: 'Check your email!'
-    Label:
-        text: 'We sent you some a passcode in you email.'
-    TextInput:
-        id: passcode
-        hint_text: "passcode"
-        multiline: False
-        size_hint: 0.8, 0.07
-        font_size: 24
-        background_normal : ''
-        background_color: 1, 1, 1, 1
-        hint_text_color: 0.349, 0.298, 0.721, 1
-        foreground_color: 0.349, 0.298, 0.721, 1
-        cursor_color: 0.349, 0.298, 0.721, 1
-        pos_hint: {"x": 0.1, "y": 0.45}
-        padding_y: [12, 10]
-    Button:
-        text: 'Submit'
-        background_normal: ''
-        background_down: ''
-        background_color: 0.494, 0, 0.592
-        color: 1, 1, 1
-        #on_release: app.passcodesubmission()
+    FloatLayout:
+        size: root.width, root.height
+        Widget:
+            opacity: 1
+            canvas:
+                Color:
+                    rgb: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        Label:
+            text: "[b]Check your Email![/b]"
+            markup: True
+            text_size: self.size
+            font_size: 28
+            color: 0.494, 0, 0.592
+            pos_hint: {'x': 0.1, 'y': 0.60}
+            size_hint_x: 0.8
+        Label:
+            text: 'Please enter your temporary 5 digit pascode below '
+            text_size: self.size
+            font_size: 20
+            color: 0.494, 0, 0.592
+            pos_hint: {'x': 0.1, 'y': 0.55}
+            size_hint_x: 0.8
+        TextInput:
+            id: email
+            hint_text: "code"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal : ''
+            background_color: 0.494, 0, 0.592, 0.15
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.40}
+            padding_y: [12, 10]
+        Button:
+            text: 'Submit'
+            font_size: 24
+            background_normal: ''
+            background_down: ''
+            background_color: 0.494, 0, 0.592
+
+            color: 1, 1, 1
+            size_hint: 0.8, 0.07
+            pos_hint: {'x': 0.1, 'y': 0.30}
