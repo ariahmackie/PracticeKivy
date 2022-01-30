@@ -19,22 +19,51 @@
 <ChangePasswordPopup@Popup>:
     auto_dismiss: False
     id: popup
-    title: "hello world"
-    BoxLayout:
-        orientation: 'vertical'
+    title: "Change Password"
+    FloatLayout:
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: "Please Create a New Password"
+            color: 1, 1, 1
+            font_size: 24
+            pos_hint: {"center_x": 0.5, "center_y": 0.9}
         TextInput:
             id: email
-            hint_text: "email"
+            hint_text: "password"
             multiline: False
-            size_hint: 0.8, 0.07
+            size_hint: 0.8, 0.12
             font_size: 24
             background_normal : ''
             background_color: 1, 1, 1, 1
             hint_text_color: 0.349, 0.298, 0.721, 1
             foreground_color: 0.349, 0.298, 0.721, 1
             cursor_color: 0.349, 0.298, 0.721, 1
-            pos_hint: {"x": 0.1, "y": 0.45}
-            padding_y: [12, 10]
+            pos_hint: {"center_x": 0.5, "center_y": 0.8}
+            padding_y: [15, 10]
+        TextInput:
+            id: email
+            hint_text: "password_repeat"
+            multiline: False
+            size_hint: 0.8, 0.12
+            font_size: 24
+            background_normal : ''
+            background_color: 1, 1, 1, 1
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.6}
+            padding_y: [15, 10]
         Button:
-            text: "dismiss"
+            text: "Submit"
+            font_size: 24
             on_release: root.dismiss()
+            pos_hint: {"center_x": 0.5, "center_y" : 0.4}
+            size_hint: 0.8, 0.12
+            background_normal: ''
+            background_color: 0.40, 1, 1, 1
+            color: 0, 0, 0, 1
