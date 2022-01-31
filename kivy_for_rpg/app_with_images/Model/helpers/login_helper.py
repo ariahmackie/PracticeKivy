@@ -39,7 +39,8 @@ def email_passcode(email):
     passcode = generate_five_digit_passcode()
     newemail = Email(receiver_address, "Passcode", str(passcode))
     newemail.send()
-    
+    return passcode
+
 def generate_five_digit_passcode(): #createaccount_login_forgot_password helpers
     passcode = random.randint(00000, 99999)
     return passcode

@@ -12,6 +12,7 @@ from kivy.uix.gridlayout import GridLayout
 from Model.helpers import login_helper as lh
 from Model.helpers import dummy_players as dp
 from kivy.graphics import Rectangle, Color
+from kivy.factory import Factory
 Window.size = (400,800)
 player1 = dp.create_test_user1()
 player2 = dp.create_test_user2()
@@ -70,8 +71,18 @@ class LoginApp(MDApp):
         if player != 0:
             print("trying to send passcode")
             self.sm.current = 'passcodesubmission'
-            lh.email_passcode(email)
-            
+            self.correct_passcode = lh.email_passcode(email)
+            print(self.correct_passcode)
+
+    def validate_passcode(self,user_passcode):
+        if str(user_passcode) == str(self.correct_passcode):
+            self.sm.current = 'home'
+            Factory.ChangePasswordPopup().open()
+
+        else:
+            warning = Label(text = '[color=ff3333]Wrong passcode.[/color]', markup = True, pos = (270, 370), size = (50, 50), size_hint = (None, None))
+            self.sm.current_screen.add_widget(warning)
+
 
 
 if __name__ == "__main__":
