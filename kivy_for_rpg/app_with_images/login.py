@@ -44,6 +44,9 @@ class LoginApp(MDApp):
         self.sm.add_widget(PassCodeSubmission(name = 'passcodesubmission'))
         return self.sm
 
+    def to_login(self):
+        self.sm.current = 'login'
+
     def read_login_input(self,email, password):
         self.validate_password(email, password)
 
@@ -67,8 +70,8 @@ class LoginApp(MDApp):
         self.sm.current = 'forgotpassword'
 
     def passcodesubmission(self, email):
-        player = lh.get_registered_player_via_email(email, players)
-        if player != 0:
+        self.player = lh.get_registered_player_via_email(email, players)
+        if self.player != 0:
             print("trying to send passcode")
             self.sm.current = 'passcodesubmission'
             self.correct_passcode = lh.email_passcode(email)
@@ -83,7 +86,12 @@ class LoginApp(MDApp):
             warning = Label(text = '[color=ff3333]Wrong passcode.[/color]', markup = True, pos = (270, 370), size = (50, 50), size_hint = (None, None))
             self.sm.current_screen.add_widget(warning)
 
-
+    def save_newpassword(self, newpassword):
+        print("old password:")
+        print(self.player.player_account.password)
+        self.player.player_account.password = newpassword
+        print("New password")
+        print(self.player.player_account.password)
 
 if __name__ == "__main__":
     LoginApp().run()

@@ -322,8 +322,8 @@
             font_size: 24
             pos_hint: {"center_x": 0.5, "center_y": 0.9}
         TextInput:
-            id: email
-            hint_text: "password"
+            id: newpassword
+            hint_text: "new password"
             multiline: False
             size_hint: 0.8, 0.12
             font_size: 24
@@ -334,22 +334,10 @@
             cursor_color: 0.349, 0.298, 0.721, 1
             pos_hint: {"center_x": 0.5, "center_y": 0.8}
             padding_y: [15, 10]
-        TextInput:
-            id: email
-            hint_text: "password_repeat"
-            multiline: False
-            size_hint: 0.8, 0.12
-            font_size: 24
-            background_normal : ''
-            background_color: 1, 1, 1, 1
-            hint_text_color: 0.349, 0.298, 0.721, 1
-            foreground_color: 0.349, 0.298, 0.721, 1
-            cursor_color: 0.349, 0.298, 0.721, 1
-            pos_hint: {"center_x": 0.5, "center_y": 0.6}
-            padding_y: [15, 10]
         Button:
             text: "Submit"
             font_size: 24
+            on_press: app.save_newpassword(newpassword.text)
             on_release: root.dismiss()
             pos_hint: {"center_x": 0.5, "center_y" : 0.4}
             size_hint: 0.8, 0.12
@@ -404,11 +392,20 @@
             background_normal: ''
             background_down: ''
             background_color: 0.494, 0, 0.592
-
             color: 1, 1, 1
             size_hint: 0.8, 0.07
             pos_hint: {'x': 0.1, 'y': 0.30}
             on_release: app.passcodesubmission(email.text)
+        Button:
+            text: 'Back'
+            font_size: 24
+            background_normal: ''
+            background_down: ''
+            background_color: 0.494, 0, 0.592
+            color: 1, 1, 1
+            size_hint: 0.1, 0.1
+            pos_hint: {'x': 0.1, 'y': 0.1}
+            on_release: app.to_login()
 
 <PassCodeSubmission>:
     name: 'passcodesubmission'
