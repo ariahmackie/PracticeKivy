@@ -31,6 +31,9 @@ class ForgotPassword(Screen):
 class PassCodeSubmission(Screen):
     pass
 
+class NewAccount(Screen):
+    pass
+
 sm = ScreenManager(transition = NoTransition())
 sm.add_widget(Login(name='login'))
 sm.add_widget(Home(name='home'))
@@ -42,10 +45,19 @@ class LoginApp(MDApp):
         self.sm.add_widget(Home(name='home'))
         self.sm.add_widget(ForgotPassword(name = 'forgotpassword'))
         self.sm.add_widget(PassCodeSubmission(name = 'passcodesubmission'))
+        self.sm.add_widget(NewAccount(name = 'newaccount'))
         return self.sm
+
+    def to_new_account(self):
+        self.sm.current = 'newaccount'
+    def create_new_user(self):
+        pass
 
     def to_login(self):
         self.sm.current = 'login'
+
+    def to_forgotpassword(self):
+        self.sm.current = 'forgotpassword'
 
     def read_login_input(self,email, password):
         self.validate_password(email, password)
