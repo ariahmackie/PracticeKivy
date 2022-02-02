@@ -10,14 +10,16 @@ from kivy.lang import Builder
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 from Model.helpers import login_helper as lh
+from Model.player import Player
 from Model.helpers import dummy_players as dp
 from kivy.graphics import Rectangle, Color
 from kivy.factory import Factory
+import re
+
 Window.size = (400,800)
 player1 = dp.create_test_user1()
 player2 = dp.create_test_user2()
 players = [player1, player2]
-
 
 class Login(Screen):
     pass
@@ -58,6 +60,44 @@ class LoginApp(MDApp):
 
     def to_forgotpassword(self):
         self.sm.current = 'forgotpassword'
+
+    def create_new_user(self, username, email, password):
+        if self.is_valid_account(username, email, password):
+            new_player = Player(email, username, password)
+            self.player = new_player
+            self.sm.current = "home"
+        else:
+            print("Did not make an account.")
+
+    def is_valid_account(self, username, email, password):
+        if self.is_available_username(username):
+            if self.is_available_email(email):
+                #if self.is_valid_email(email):
+                #    return True
+                return True
+        else:
+            return False
+
+    def is_available_username(self, username):
+        player = lh.get_registered_player_via_username(username, players)
+        if player == 0:
+            return True
+        print("username not available")
+        return False
+
+    def is_available_email(self, email):
+        player = lh.get_registered_player_via_email(email, players)
+        if player == 0:
+            return True
+        print("email already used")
+        return False
+
+    def is_valid_email(self, email):
+        rx =  r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' # from https://www.geeksforgeeks.org/check-if-email-address-valid-or-not-in-python/
+        if re.fullmatch(rx, email):
+            return True
+        print("not a valid email")
+        return False
 
     def read_login_input(self,email, password):
         self.validate_password(email, password)

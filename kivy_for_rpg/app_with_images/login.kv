@@ -480,9 +480,19 @@
     FloatLayout:
         size: root.width, root.height
         canvas:
+            Color:
+                rgb: 1, 1, 1, 1
             Rectangle:
                 size: root.width, root.height
-                source: "purplegradient3.png"
+        Label:
+            text: "[b]Create a new Account[/b]"
+            markup: True
+            text_size: self.size
+            font_size: 28
+            color: 0.494, 0, 0.592
+            pos_hint: {'center_x': 0.5, 'y': 0.70}
+            size_hint_x: 0.8
+
         TextInput:
             id: username
             hint_text: "username"
@@ -490,6 +500,7 @@
             size_hint: 0.8, 0.07
             font_size: 24
             background_normal : ''
+            background_color: 0.494, 0, 0.592, 0.15
             hint_text_color: 0.349, 0.298, 0.721, 1
             pos_hint: {"x": 0.1, "y": 0.55}
             padding_y: [12, 10]
@@ -500,7 +511,7 @@
             size_hint: 0.8, 0.07
             font_size: 24
             background_normal : ''
-            background_color: 1, 1, 1, 1
+            background_color: 0.494, 0, 0.592, 0.15
             hint_text_color: 0.349, 0.298, 0.721, 1
             foreground_color: 0.349, 0.298, 0.721, 1
             cursor_color: 0.349, 0.298, 0.721, 1
@@ -513,7 +524,7 @@
             size_hint: 0.8, 0.07
             font_size: 24
             background_normal: ''
-            background_color: 1, 1, 1, 1
+            background_color: 0.494, 0, 0.592, 0.15
             hint_text_color:  0.349, 0.298, 0.721, 1
             foreground_color: 0.349, 0.298, 0.721, 1
             cursor_color: 0.349, 0.298, 0.721, 1
@@ -526,10 +537,9 @@
             font_size: 24
             pos_hint: {"center_x": 0.5, "top": 0.30}
             background_normal: ''
-            background_color: 1, 1, 1, 1
-            color: 0.349, 0.298, 0.721, 1
+            background_color: 0.494, 0, 0.594
             on_release:
-                app.create_new_user()
+                app.create_new_user(str(username), str(email), str(password))
         Button:
             text: 'Back'
             font_size: 24
@@ -539,4 +549,4 @@
             color: 0, 0, 0, 1
             size_hint: 0.2, 0.05
             pos_hint: {'x': 0.1, 'y': 0.1}
-            on_release: app.to_login
+            on_release: app.to_login()
