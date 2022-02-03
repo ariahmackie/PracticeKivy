@@ -126,6 +126,7 @@
                 pos: self.pos
                 size: self.size
 
+
     Widget:
         pos_hint: {"center_x": 0.5, "center_y": 0.06}
         size_hint: 0.91, 0.07
@@ -136,7 +137,6 @@
                 pos: self.pos
                 size: self.size
                 source: "purplegradient3.png"
-
 
     # menu button
     Widget:
@@ -304,7 +304,19 @@
                     text: "b"
                     font_size: 24
                     color: 0.349, 0.298, 0.722
-
+    FloatLayout:
+        pos_hint: {"x": 0, "y": 0}
+        size_hint: 1, 1
+        Button:
+            background_color: 1, 1, 1, 1
+            font_size: 60
+            size_hint: 0.14, 0.06
+            pos_hint: {"center_x": 0.5, "y": 0.03}
+            text: "+"
+            color: 0.494, 0, 0.592
+            background_normal: ""
+            background_down: ""
+            on_release: app.to_new_task()
 
 <ChangePasswordPopup@Popup>:
     auto_dismiss: False
@@ -550,3 +562,38 @@
             size_hint: 0.2, 0.05
             pos_hint: {'x': 0.1, 'y': 0.1}
             on_release: app.to_login()
+
+<NewTask>:
+    FloatLayout:
+        size_hint: 1, 1
+        pos_hint: {'x': 0, 'y': 0}
+    TextInput:
+        id: title
+        hint_text: "Title"
+        multiline: False
+        size_hint: 0.8, 0.07
+        font_size: 24
+        background_normal: ''
+        background_color: 0.494, 0, 0.592, 0.15
+        hint_text_color:  0.349, 0.298, 0.721, 1
+        foreground_color: 0.349, 0.298, 0.721, 1
+        cursor_color: 0.349, 0.298, 0.721, 1
+        pos_hint: {"x": 0.1, "y": 0.7}
+        padding_y: [12, 10]
+    TextInput:
+        id: description
+        hint_text: "description"
+        multiline: True
+        size_hint: 0.8, 0.07
+        font_size: 24
+        background_normal: ''
+        background_color: 0.494, 0, 0.592, 0.15
+        hint_text_color:  0.349, 0.298, 0.721, 1
+        foreground_color: 0.349, 0.298, 0.721, 1
+        cursor_color: 0.349, 0.298, 0.721, 1
+        pos_hint: {"x": 0.1, "y": 0.5}
+        padding_y: [12, 10]
+    Button:
+        text: "select difficulty"
+        pos_hint: {'x': 0.1, "y": 0.3}
+        

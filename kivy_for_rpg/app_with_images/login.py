@@ -14,6 +14,7 @@ from Model.player import Player
 from Model.helpers import dummy_players as dp
 from kivy.graphics import Rectangle, Color
 from kivy.factory import Factory
+from kivy.uix.dropdown import DropDown
 import re
 
 Window.size = (400,800)
@@ -36,6 +37,11 @@ class PassCodeSubmission(Screen):
 class NewAccount(Screen):
     pass
 
+class NewTask(Screen):
+    pass
+class DifficultyDropdown(DropDown):
+    pass
+
 sm = ScreenManager(transition = NoTransition())
 sm.add_widget(Login(name='login'))
 sm.add_widget(Home(name='home'))
@@ -48,18 +54,20 @@ class LoginApp(MDApp):
         self.sm.add_widget(ForgotPassword(name = 'forgotpassword'))
         self.sm.add_widget(PassCodeSubmission(name = 'passcodesubmission'))
         self.sm.add_widget(NewAccount(name = 'newaccount'))
+        self.sm.add_widget(NewTask(name = 'newtask'))
         return self.sm
 
     def to_new_account(self):
         self.sm.current = 'newaccount'
-    def create_new_user(self):
-        pass
 
     def to_login(self):
         self.sm.current = 'login'
 
     def to_forgotpassword(self):
         self.sm.current = 'forgotpassword'
+
+    def to_new_task(self):
+        self.sm.current = 'newtask'
 
     def create_new_user(self, username, email, password):
         if self.is_valid_account(username, email, password):
