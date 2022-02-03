@@ -593,7 +593,16 @@
         cursor_color: 0.349, 0.298, 0.721, 1
         pos_hint: {"x": 0.1, "y": 0.5}
         padding_y: [12, 10]
+
+<DifficultyDropDown>:
     Button:
-        text: "select difficulty"
-        pos_hint: {'x': 0.1, "y": 0.3}
-        
+        text: 'first item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item1')
+
+    Label:
+        text: 'unselectable item'
+        size_hint_y: None
+        height: 44
+        on_release: root.select('item2')

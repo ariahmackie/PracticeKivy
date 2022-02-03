@@ -38,8 +38,30 @@ class NewAccount(Screen):
     pass
 
 class NewTask(Screen):
-    pass
-class DifficultyDropdown(DropDown):
+    def build(self):
+        dropdown = DifficultyDropDown()
+        mainbutton = Button(text = "z", size_hint = (None, None))
+        mainbutton.bind(on_release=dropdown.open)
+        dropdown.bind(onselect=lambda instance, x: setattr(mainbutton, 'text', x))
+    # def build(self):
+    #     self.dropdown = DropDown()
+    #
+    #     self.easy_button = Button(text = "easy", size_hint_y = None, height = 40)
+    #     self.easy_button.bind(on_release= lambda self.easy_button: self.dropdown.select(self.easy_button.text))
+    #
+    #     self.medium_button = Button(text = "medium", size_hint_y = None, height = 40)
+    #     self.medium_button.bind(on_release= lambda self.medium_button: self.dropdown.select(self.medium_button.text))
+    #
+    #     self.hard_button = Button(text = "hard", size_hint_y = None, height = 40)
+    #     self.hard_button.bind(on_release = lambda self.hard_button: self.dropdown.select(self.hard_button.text))
+    #
+    # ass    self.dropdown.add_widget(self.easy_button)
+    #     self.dropdown.add_widget(self.medium_button)
+    #     self.dropdown.add_widget(self.hard_button)
+    #
+    #     self.main_button = Button(text = "Select Difficulty", size_hint = (None, None))
+    #     self.main_button.bind(on_release = self.dropdown.open)
+class DifficultyDropDown(DropDown):
     pass
 
 sm = ScreenManager(transition = NoTransition())
@@ -68,6 +90,8 @@ class LoginApp(MDApp):
 
     def to_new_task(self):
         self.sm.current = 'newtask'
+        NewTask().build()
+
 
     def create_new_user(self, username, email, password):
         if self.is_valid_account(username, email, password):
@@ -101,7 +125,7 @@ class LoginApp(MDApp):
         return False
 
     def is_valid_email(self, email):
-        rx =  r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' # from https://www.geeksforgeeks.org/check-if-email-address-valid-or-not-in-python/
+        rx =  r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' # from https://www.geeksforgeeks.org/check-if-email-ress-valid-or-not-in-python/
         if re.fullmatch(rx, email):
             return True
         print("not a valid email")
@@ -124,7 +148,7 @@ class LoginApp(MDApp):
 
     def password_error_message(self):
         warning = Label(text = '[color=ff3333]Wrong password.[/color]', markup = True, pos = (270, 270), size = (50, 50), size_hint = (None, None)  )
-        self.sm.current_screen.add_widget(warning)
+        self.sm.current_screen._widget(warning)
 
     def forgotpassword(self):
         self.sm.current = 'forgotpassword'
@@ -144,7 +168,7 @@ class LoginApp(MDApp):
 
         else:
             warning = Label(text = '[color=ff3333]Wrong passcode.[/color]', markup = True, pos = (270, 370), size = (50, 50), size_hint = (None, None))
-            self.sm.current_screen.add_widget(warning)
+            self.sm.current_screen._widget(warning)
 
     def save_newpassword(self, newpassword):
         print("old password:")
