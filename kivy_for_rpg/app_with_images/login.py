@@ -41,8 +41,8 @@ class NewAccount(Screen):
 class NewTask(Screen):
     pass
 
-class DifficultyDropDown(BoxLayout):
-    pass
+#class DifficultyDropDown(BoxLayout):
+#    pass
 
 sm = ScreenManager(transition = NoTransition())
 sm.add_widget(Login(name='login'))
