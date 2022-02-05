@@ -1,0 +1,634 @@
+#: import Factory kivy.factory.Factory
+
+<Login>:
+    name : "login"
+    Widget:
+        pos_hint: {'x': 0 , 'y': 0.60}
+        size_hint: 1, 0.40
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                size: self.size
+                pos: self.pos
+            Ellipse:
+                pos: self.center_x - 130, self.center_y - 130
+                size: 260, 260
+                source: 'purplegradient.png'
+            Rectangle:
+                pos: self.center_x - 70, self.center_y - 70
+                size: 140, 140
+                source: 'sword.png'
+    Widget:
+        pos_hint: {'x': 0, 'y' : 0}
+        size_hint: 1, 0.6
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                size: self.size
+                pos: self.pos
+
+    FloatLayout:
+        size: root.width, root.height
+        TextInput:
+            id: email
+            hint_text: "email"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal : ''
+            background_color: 1, 1, 1, 1
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.45}
+            padding_y: [12, 10]
+        TextInput:
+            id: password
+            hint_text: "password"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal: ''
+            background_color: 1, 1, 1, 1
+            hint_text_color:  0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.35}
+            padding_y: [12, 10]
+
+        Button:
+            text: "Login"
+            size_hint: 0.45, 0.06
+            font_size: 24
+            pos_hint: {"center_x": 0.5, "top": 0.30}
+            background_normal: ''
+            background_color: 0.40, 1, 1, 1
+            color: 0, 0, 0, 1
+            on_release:
+                #app.read_login_input(email.text, password.text)
+                app.to_home()
+        MDTextButton:
+            text: "Forgot password?"
+            color: 1, 1, 1, 1
+            font_size: 18
+            pos_hint: {"center_x": 0.5, "y": 0.1}
+            on_release: app.forgotpassword()
+        MDTextButton:
+            text: "Create Account"
+            color: 1, 1, 1, 1
+            font_size: 18
+            pos_hint: {"center_x": 0.5, "y": 0.06}
+            on_release: app.to_new_account()
+
+<Home>
+    name: "home"
+    Widget:
+        pos_hint: {"x": 0, "y": 0}
+        size_hint: 1, 1
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                pos: self.pos
+                size: self.size
+    # main background (top)
+    Widget:
+        pos_hint: {"center_x": 0.5, "center_y": 0.84}
+        size_hint: 0.93, 0.28
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle
+                pos: self.pos
+                size: self.size
+
+    Widget:
+        pos_hint: {"center_x": 0.5, "center_y": 0.84}
+        size_hint: 0.91, 0.27
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "purplegradient3.png"
+
+
+      # main background (bottom)
+    Widget:
+        pos_hint: {"center_x": 0.5, "center_y": 0.06}
+        size_hint: 0.93, 0.08
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+    Widget:
+        pos_hint: {"center_x": 0.5, "center_y": 0.06}
+        size_hint: 0.91, 0.07
+        canvas:
+            Color:
+                rgba: 1, 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: "purplegradient3.png"
+
+    # menu button
+    Widget:
+        pos_hint: {"x": 0.05, "y": 0.92}
+        size_hint: 0.1, 0.05
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+                source: 'list.png'
+
+# user image
+    Widget:
+        pos_hint: {"x": 0.08, "center_y": 0.82}
+        size_hint: 0.3, 0.15
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                pos: self.x + 8, self.y + 8
+                size: self.width - 16, self.height - 16
+            Rectangle:
+                pos: self.x + 11 , self.y + 11
+                size: self.width - 22, self.height -22
+                source: "user.jpg"
+    # progress
+    Widget:
+        pos_hint: { "x": 0.45, "y": 0.74}
+        size_hint: 0.45, 0.20
+        canvas:
+            Color:
+                rgb: 1, 1, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+            Rectangle:
+                source: "heart.png"
+                pos: self.x + 5, self.y + 110
+                size:40, 35
+            Rectangle:
+                source: "star.png"
+                pos: self.x + 5, self.y + 40
+                size: 40, 40
+
+    FloatLayout:
+        Label:
+            pos_hint: {'x': 0.7, "y": 0.82}
+            text: "health"
+            color: 0.494, 0, 0.592
+            size_hint: (0.25, 0.1)
+            font_size: 16
+        MDProgressBar:
+            id: health_bar
+            pos_hint: {'x': 0.58, 'y': 0.84}
+            size_hint: (0.25, 0.1)
+            max: 100
+            value: 20
+            color: 0.494, 0, 0.592
+        Label:
+            pos_hint: {'x': 0.7, "y": 0.75}
+            size_hint: ( 0.25, 0.1)
+            font_size: 16
+            text: "XP"
+            color: 0.349, 0.298, 0.722
+        MDProgressBar:
+            id: xp_bar
+            pos_hint: {'x': 0.58, 'y': 0.77}
+            size_hint: (0.25, 0.1)
+            max: 100
+            value: 30
+            color: 0.349, 0.298, 0.722
+        Label:
+            pos_hint: {'x': 0.4, "y": 0.71}
+            size_hint: (0.25, 0.1)
+            font_size: 16
+            color: 0.349, 0.298, 0.722
+            text: "Level:"
+        Label:
+            pos_hint: {'x': 0.6, "y": 0.71}
+            size_hint: (0.25, 0.1)
+            font_size: 16
+            color: 0.349, 0.298, 0.722
+            text: "Coins:"
+# list background
+    FloatLayout:
+        pos_hint: {"center_x": 0.5, "center_y": 0.45}
+        size_hint: 1, 0.43
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+    FloatLayout:
+        pos_hint: {"center_x": 0.5, "center_y": 0.35}
+        size_hint: 0.94, 0.55
+        ScrollView:
+            pos_hint: {"center_x": 0.5, "y": 0.10}
+            do_scroll_x: False
+            do_scroll_y: True
+            GridLayout:
+                cols: 1
+                spacing: 3
+                size_hint_y: None
+                Button:
+                    background_normal: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    background_down: 'checklist.png'
+                    size_hint_y: None
+                    height: 75
+                    text: "a"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_down: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    size_hint_y: None
+                    height: 75
+                    text: "b"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    background_down: 'checklist.png'
+                    size_hint_y: None
+                    height: 75
+                    text: "a"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_down: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    size_hint_y: None
+                    height: 75
+                    text: "b"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    background_down: 'checklist.png'
+                    size_hint_y: None
+                    height: 75
+                    text: "a"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+                Button:
+                    background_normal: 'checklist.png'
+                    background_down: 'checklist.png'
+                    background_color: 1, 1, 1, 1
+                    size_hint_y: None
+                    height: 75
+                    text: "b"
+                    font_size: 24
+                    color: 0.349, 0.298, 0.722
+    FloatLayout:
+        pos_hint: {"x": 0, "y": 0}
+        size_hint: 1, 1
+        Button:
+            background_color: 1, 1, 1, 1
+            font_size: 60
+            size_hint: 0.14, 0.06
+            pos_hint: {"center_x": 0.5, "y": 0.03}
+            text: "+"
+            color: 0.494, 0, 0.592
+            background_normal: ""
+            background_down: ""
+            on_release: app.to_new_task()
+
+<ChangePasswordPopup@Popup>:
+    auto_dismiss: False
+    id: popup
+    title: "Change Password"
+    FloatLayout:
+        canvas:
+            Color:
+                rgb: 0.494, 0, 0.592
+            Rectangle:
+                size: self.size
+                pos: self.pos
+        Label:
+            text: "Please Create a New Password"
+            color: 1, 1, 1
+            font_size: 24
+            pos_hint: {"center_x": 0.5, "center_y": 0.9}
+        TextInput:
+            id: newpassword
+            hint_text: "new password"
+            multiline: False
+            size_hint: 0.8, 0.12
+            font_size: 24
+            background_normal : ''
+            background_color: 1, 1, 1, 1
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"center_x": 0.5, "center_y": 0.8}
+            padding_y: [15, 10]
+        Button:
+            text: "Submit"
+            font_size: 24
+            on_press: app.save_newpassword(newpassword.text)
+            on_release: root.dismiss()
+            pos_hint: {"center_x": 0.5, "center_y" : 0.4}
+            size_hint: 0.8, 0.12
+            background_normal: ''
+            background_color: 0.40, 1, 1, 1
+            color: 0, 0, 0, 1
+
+
+<ForgotPassword>:
+    name: 'forgotpassword'
+    FloatLayout:
+        size: root.width, root.height
+        Widget:
+            opacity: 1
+            canvas:
+                Color:
+                    rgb: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        Label:
+            text: "[b]Please Enter Your Email[/b]"
+            markup: True
+            text_size: self.size
+            font_size: 28
+            color: 0.494, 0, 0.592
+            pos_hint: {'x': 0.1, 'y': 0.60}
+            size_hint_x: 0.8
+        Label:
+            text: 'We will send you a passcode.'
+            text_size: self.size
+            font_size: 20
+            color: 0.494, 0, 0.592
+            pos_hint: {'x': 0.1, 'y': 0.55}
+            size_hint_x: 0.8
+        TextInput:
+            id: email
+            hint_text: "email"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal : ''
+            background_color: 0.494, 0, 0.592, 0.15
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.40}
+            padding_y: [12, 10]
+        Button:
+            text: 'Submit'
+            font_size: 24
+            background_normal: ''
+            background_down: ''
+            background_color: 0.494, 0, 0.592
+            color: 1, 1, 1
+            size_hint: 0.8, 0.07
+            pos_hint: {'x': 0.1, 'y': 0.30}
+            on_release: app.passcodesubmission(email.text)
+        Button:
+            text: 'Back'
+            font_size: 24
+            background_normal: ''
+            background_down: ''
+            background_color: 0.40, 1, 1, 1
+            color: 0, 0, 0, 1
+            size_hint: 0.2, 0.05
+            pos_hint: {'x': 0.1, 'y': 0.1}
+            on_release: app.to_login()
+
+<PassCodeSubmission>:
+    name: 'passcodesubmission'
+    FloatLayout:
+        size: root.width, root.height
+        Widget:
+            opacity: 1
+            canvas:
+                Color:
+                    rgb: 1, 1, 1, 1
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+        Label:
+            text: "[b]Check your Email![/b]"
+            markup: True
+            text_size: self.size
+            font_size: 28
+            color: 0.494, 0, 0.592
+            pos_hint: {'x': 0.1, 'y': 0.60}
+            size_hint_x: 0.8
+        Label:
+            text: 'Please enter your temporary 5 digit pascode below '
+            text_size: self.size
+            font_size: 20
+            color: 0.494, 0, 0.592
+            pos_hint: {'x': 0.1, 'y': 0.55}
+            size_hint_x: 0.8
+        TextInput:
+            id: code
+            hint_text: "code"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal : ''
+            background_color: 0.494, 0, 0.592, 0.15
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.40}
+            padding_y: [12, 10]
+        Button:
+            text: 'Submit'
+            font_size: 24
+            background_normal: ''
+            background_down: ''
+            background_color: 0.494, 0, 0.592
+            color: 1, 1, 1
+            size_hint: 0.8, 0.07
+            pos_hint: {'x': 0.1, 'y': 0.30}
+            on_release: app.validate_passcode(code.text)
+        MDTextButton:
+            text: "Didn't receive passcode? Try again"
+            pos_hint: {'center_x': 0.5, 'y': 0.20}
+            font_size: 24
+            color: 0.494, 0, 0.592
+            on_release: app.to_forgotpassword()
+        Button:
+            text: 'Back'
+            font_size: 24
+            background_normal: ''
+            background_down: ''
+            background_color: 0.40, 1, 1, 1
+            color: 0, 0, 0, 1
+            size_hint: 0.2, 0.05
+            pos_hint: {'x': 0.1, 'y': 0.1}
+            on_release: app.to_forgotpassword()
+
+<NewAccount>:
+    name: 'newaccount'
+    FloatLayout:
+        size: root.width, root.height
+        canvas:
+            Color:
+                rgb: 1, 1, 1, 1
+            Rectangle:
+                size: root.width, root.height
+        Label:
+            text: "[b]Create a new Account[/b]"
+            markup: True
+            text_size: self.size
+            font_size: 28
+            color: 0.494, 0, 0.592
+            pos_hint: {'center_x': 0.5, 'y': 0.70}
+            size_hint_x: 0.8
+
+        TextInput:
+            id: username
+            hint_text: "username"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal : ''
+            background_color: 0.494, 0, 0.592, 0.15
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.55}
+            padding_y: [12, 10]
+        TextInput:
+            id: email
+            hint_text: "email"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal : ''
+            background_color: 0.494, 0, 0.592, 0.15
+            hint_text_color: 0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.45}
+            padding_y: [12, 10]
+        TextInput:
+            id: password
+            hint_text: "password"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal: ''
+            background_color: 0.494, 0, 0.592, 0.15
+            hint_text_color:  0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.35}
+            padding_y: [12, 10]
+
+        Button:
+            text: "Create Account"
+            size_hint: 0.45, 0.06
+            font_size: 24
+            pos_hint: {"center_x": 0.5, "top": 0.30}
+            background_normal: ''
+            background_color: 0.494, 0, 0.594
+            on_release:
+                app.create_new_user(str(username), str(email), str(password))
+        Button:
+            text: 'Back'
+            font_size: 24
+            background_normal: ''
+            background_down: ''
+            background_color: 0.40, 1, 1, 1
+            color: 0, 0, 0, 1
+            size_hint: 0.2, 0.05
+            pos_hint: {'x': 0.1, 'y': 0.1}
+            on_release: app.to_login()
+
+<NewTask>:
+    FloatLayout:
+        size_hint: 1, 1
+        pos_hint: {'x': 0, 'y': 0}
+        TextInput:
+            id: title
+            hint_text: "Title"
+            multiline: False
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal: ''
+            background_color: 0.494, 0, 0.592, 0.15
+            hint_text_color:  0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.7}
+            padding_y: [12, 10]
+        TextInput:
+            id: description
+            hint_text: "description"
+            multiline: True
+            size_hint: 0.8, 0.07
+            font_size: 24
+            background_normal: ''
+            background_color: 0.494, 0, 0.592, 0.15
+            hint_text_color:  0.349, 0.298, 0.721, 1
+            foreground_color: 0.349, 0.298, 0.721, 1
+            cursor_color: 0.349, 0.298, 0.721, 1
+            pos_hint: {"x": 0.1, "y": 0.5}
+            padding_y: [12, 10]
+        Button:
+            background_normal: ''
+            background_color: 0.349, 0.298, 0.721, 1
+            text: "select difficulty"
+            text_size: self.size
+            text_pos: self.width/2, self.height/ 2
+            size_hint: 0.8, 0.2
+            pos_hint: {"x": 0.1, "y": 0.3}
+            on_release: Factory.DifficultyDropDown().open(self)
+
+<DifficultyDropDown@DropDown>:
+    # Button:
+    #     id: main_btn
+    #     text: "Select Difficulty"
+    #     on_release: difficulty_dropdown.open(self)
+    #     on_parent: difficulty_dropdown.dismiss()
+    #     size_hint_y: None
+    #     size_hint: 0.45, 0.06
+    #     font_size: 24
+    #     pos_hint: {"center_x": 0.5, "top": 0.10}
+    #     background_normal: ''
+    #     background_color: 0.494, 0, 0.594
+    # DropDown:
+    #     id: difficulty_dropdown
+    #     on_parent: self.dismiss()
+    #
+    #     on_select: main_btn.text = '{}'.format(args[1])
+
+    Button:
+        text: "easy"
+        size_hint_y: None
+        height: 42
+        #on_release: difficulty_dropdown.select('easy')
+    Button:
+        text: "medium"
+        size_hint_y: None
+        height: 42
+        #on_release: difficulty_dropdown.select("medium")
