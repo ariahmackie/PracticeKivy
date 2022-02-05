@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.popup import Popup
 from kivymd.app import MDApp
 from kivy.core.window import Window
@@ -38,30 +39,9 @@ class NewAccount(Screen):
     pass
 
 class NewTask(Screen):
-    def build(self):
-        dropdown = DifficultyDropDown()
-        mainbutton = Button(text = "z", size_hint = (None, None))
-        mainbutton.bind(on_release=dropdown.open)
-        dropdown.bind(onselect=lambda instance, x: setattr(mainbutton, 'text', x))
-    # def build(self):
-    #     self.dropdown = DropDown()
-    #
-    #     self.easy_button = Button(text = "easy", size_hint_y = None, height = 40)
-    #     self.easy_button.bind(on_release= lambda self.easy_button: self.dropdown.select(self.easy_button.text))
-    #
-    #     self.medium_button = Button(text = "medium", size_hint_y = None, height = 40)
-    #     self.medium_button.bind(on_release= lambda self.medium_button: self.dropdown.select(self.medium_button.text))
-    #
-    #     self.hard_button = Button(text = "hard", size_hint_y = None, height = 40)
-    #     self.hard_button.bind(on_release = lambda self.hard_button: self.dropdown.select(self.hard_button.text))
-    #
-    # ass    self.dropdown.add_widget(self.easy_button)
-    #     self.dropdown.add_widget(self.medium_button)
-    #     self.dropdown.add_widget(self.hard_button)
-    #
-    #     self.main_button = Button(text = "Select Difficulty", size_hint = (None, None))
-    #     self.main_button.bind(on_release = self.dropdown.open)
-class DifficultyDropDown(DropDown):
+    pass
+
+class DifficultyDropDown(BoxLayout):
     pass
 
 sm = ScreenManager(transition = NoTransition())
@@ -79,6 +59,8 @@ class LoginApp(MDApp):
         self.sm.add_widget(NewTask(name = 'newtask'))
         return self.sm
 
+    def to_home(self):
+        self.sm.current = 'home'
     def to_new_account(self):
         self.sm.current = 'newaccount'
 
@@ -90,7 +72,7 @@ class LoginApp(MDApp):
 
     def to_new_task(self):
         self.sm.current = 'newtask'
-        NewTask().build()
+
 
 
     def create_new_user(self, username, email, password):
