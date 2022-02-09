@@ -17,6 +17,11 @@ from kivy.graphics import Rectangle, Color
 from kivy.factory import Factory
 from kivy.uix.dropdown import DropDown
 import re
+from kivymd.uix.dialog import MDDialog
+from kivymd.uix.picker import MDDatePicker
+from kivymd.uix.boxlayout import MDBoxLayout
+from datetime import datetime
+
 
 Window.size = (400,800)
 player1 = dp.create_test_user1()
@@ -41,6 +46,20 @@ class NewAccount(Screen):
 class NewTask(Screen):
     pass
 
+class DialogBox(MDBoxLayout):
+    def __init__(self, **kwargs):
+        #super().__init__(**kwargs)
+        self.ids.date_text.text = str(datetime.now().strftime('%A %d % B % Y'))
+
+    def show_calendar(self):
+        #super().__init__(**kwargs)
+        calendar = MDDatePicker()
+        calendar.bind(on_save = self.on_save)
+        calendar.open()
+
+    def on_save(self, instance, value, date_range):
+        date = value.strftime('%A %d %B %Y')
+        self.ids.date_text.text = str(date)
 #class DifficultyDropDown(BoxLayout):
 #    pass
 
@@ -72,8 +91,6 @@ class LoginApp(MDApp):
 
     def to_new_task(self):
         self.sm.current = 'newtask'
-
-
 
     def create_new_user(self, username, email, password):
         if self.is_valid_account(username, email, password):
@@ -158,6 +175,9 @@ class LoginApp(MDApp):
         self.player.player_account.password = newpassword
         print("New password")
         print(self.player.player_account.password)
+
+    def open_calendar(self):
+        DialogBox().show_calendar()
 
 if __name__ == "__main__":
     LoginApp().run()
