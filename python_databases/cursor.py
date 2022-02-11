@@ -15,9 +15,11 @@ IMAGE BLOB);''')
 cursor = connection.cursor()
 photo_file = open('dolphin.png', "rb")
 binary_photo = photo_file.read()
-photo_tuple = ("IMAGE", binary_photo)
-insertquery = '''INSERT INTO player (USERNAME, EMAIL, COINS) VALUES ('Dolphin', 'dolphin@gmail.com', 212);'''
-cursor.execute(insertquery)
+
+insertquery = '''INSERT INTO player (USERID, USERNAME, EMAIL, COINS, IMAGE) VALUES (?, ?, ?, ?, ?);'''
+
+data_tuple = (1, "bob", "bob@gmail.com", 5, binary_photo)
+cursor.execute(insertquery, data_tuple)
 
 
 #connection.commit()
@@ -25,5 +27,4 @@ cursor.execute(insertquery)
 
 query  = connection.execute('''SELECT * FROM player;''')
 for i in query:
-        print("ID: " + str(i[0]) + "USERNAME: " + str(i[1]) + " EMAIL: " + str(i[2]) + " COINS: " + str(i[3]) )
-	
+    print(i[0:3])
