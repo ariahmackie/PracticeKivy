@@ -81,6 +81,45 @@ result = cursor.fetchall()
 for row in result:
     print(row)
 
+print("left join")
+left_join = '''
+SELECT STUDENT_ID, STUDENT.NAME,  STUDENT.AGE FROM STUDENT
+LEFT JOIN WORKER USING (AGE);'''
+
+cursor.execute(left_join)
+result = cursor.fetchall()
+for row in result:
+    print(row)
+
+#88888888888888888888888888888888888
+print("full outer join")
+
+join = '''SELECT STUDENT_ID, STUDENT.NAME, STUDENT.AGE
+FROM STUDENT
+LEFT JOIN WORKER
+USING(AGE)
+UNION ALL
+SELECT WORKER.NAME, WORKER.TYPE, WORKER.AGE
+FROM WORKER
+LEFT JOIN STUDENT
+USING(AGE); '''
+
+cursor.execute(join)
+result = cursor.fetchall()
+for row in result:
+    print(row)
+
+print("cross join")
+#combines all records from two tables
+join = '''SELECT STUDENT_ID, STUDENT.NAME, STUDENT.AGE
+FROM STUDENT
+CROSS JOIN WORKER;'''
+
+cursor.execute(join)
+result = cursor.fetchall()
+for row in result:
+    print(row)
+
 
 
 
