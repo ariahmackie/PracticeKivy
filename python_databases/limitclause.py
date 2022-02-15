@@ -5,38 +5,57 @@ import sqlite3
 connection = sqlite3.connect('insertdata.db')
 cursor = connection.cursor()
 
-
 cursor.execute('''DROP TABLE IF EXISTS STUDENT''')
+cursor.execute('''DROP TABLE IF EXISTS WORKER''')
 
-table_command = """
+student_table = """
 CREATE TABLE STUDENT(
 NAME TEXT,
 CLASS VARCHAR(255),
-AGE INTEGER
-);"""
+AGE INTEGER,
+STUDENT_ID INTEGER);"""
 
-cursor.execute(table_command)
-data_tuples = [
-('Bob', 'English', 22),
-('April', 'Algebra', 19),
-('Sammy', 'History', 21),
-('Bill', 'Geometry', 20),
-('Smith', 'Algebra', 19),
-('Charles', 'English', 18),
-('Andy', 'History', 20),
-('Cindy', 'Geometry', 22),
-("Elle", 'English', 18),
-("Faith", 'English', 23)
-]
+worker_table = """
+CREATE TABLE WORKER(
+NAME TEXT,
+TYPE TEXT,
+AGE INTEGER,
+WORKER_ID INTEGER);"""
+
+cursor.execute(student_table)
+student_tuples = [
+('Bob', 'English', 22, 1),
+('April', 'Algebra', 19, 2) ,
+('Sammy', 'History', 21, 3),
+('Bill', 'Geometry', 20, 4),
+('Smith', 'Algebra', 19, 5),
+('Charles', 'English', 18, 6),
+('Andy', 'History', 20, 7),
+('Cindy', 'Geometry', 22, 8),
+("Elle", 'English', 18, 9),
+("Faith", 'English', 23, 10)]
+
+cursor.execute(worker_table)
+worker_tuples = [
+('Bob', 'SALES', 23, 2),
+('Allan', 'HR', 34, 4),
+('Sam', 'MANAGEMENT', 22, 6),
+('Smith', 'HR', 20, 8)]
 
 if cursor:
     print("Database Created!")
 else:
     print('Database Creation Failed')
 
-insert_command = '''INSERT INTO STUDENT (NAME, CLASS, AGE) VALUES (?, ?, ?);'''
-for i in data_tuples:
-    cursor.execute(insert_command, i)
+insert_student_table = '''INSERT INTO STUDENT (NAME, CLASS, AGE, STUDENT_ID) VALUES (?, ?, ?, ?);'''
+insert_worker_table = '''INSERT INTO WORKER (NAME, TYPE, AGE, WORKER_ID) VALUES (?, ?, ?, ?);'''
+
+for i in student_tuples:
+    cursor.execute(insert_student_table, i)
+
+for i in worker_tuples:
+    cursor.execute(insert_worker_table, i)
+
 
 data = cursor.execute('''SELECT * FROM STUDENT''')
 print("Not sorted")
@@ -50,7 +69,17 @@ for row in cursor.fetchall():
     print(row)
 
 #using JOIN
+print("inner join")
+inner_join = '''
+SELECT STUDENT_ID, STUDENT.NAME FROM STUDENT
+INNER JOIN WORKER
+ON STUDENT.STUDENT_ID = WORKER.WORKER_ID; '''
 
+cursor.execute(inner_join)
+
+result = cursor.fetchall()
+for row in result:
+    print(row)
 
 
 
