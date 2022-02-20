@@ -1,12 +1,14 @@
 #https://www.sqlitetutorial.net/sqlite-foreign-key/
 import sqlite3
-print(sqlite3.version)
+
 connection = sqlite3.connect("foreign_key.db")
 cursor = connection.cursor()
 data = cursor.execute('PRAGMA foreign_keys = ON;')
 #DROP TABLES
-cursor.execute('DROP TABLE IF EXISTS CLASS')
+
 cursor.execute('DROP TABLE IF EXISTS STUDENTS')
+cursor.execute('DROP TABLE IF EXISTS CLASS')
+
 
 #CREATE TABLES
 cursor.execute('''CREATE TABLE CLASS(
