@@ -24,33 +24,70 @@ account_tuples = [
 
 
 #description, user, health_value
-food_tuples =[
+fruit_tuples =[
 ("apple", "any", 2),
-("banana", "any", 2),
-("berries", "any", 2),
+("banana", "any", 3),
+("berries", "any", 1),
 ("cherries", "any", 2),
 ("coconut", "any", 3),
-("grapefruit", "any", 2),
-("grapes", "any", 2),
+("grapefruit", "any", 4),
+("grapes", "any", 1),
 ("kiwi", "any", 2),
-("lemon", "any", 2),
-("lime", "any", 2),
-("mango", "any", 2),
+("lemon", "any", 3),
+("lime", "any", 4),
+("mango", "any", 1),
 ("orange", "any", 2),
-("peach", "any", 2),
-("pear", "any", 2),
-("pineapple", "any", 2),
+("peach", "any", 3),
+("pear", "any", 4),
+("pineapple", "any", 1),
 ("strawberries", "any", 2),
-("watermelon", "any", 2)
+("watermelon", "any", 3)]
 
+vegetable_tuples = [
+("artichoke", "any", 1),
+("asparagus", "any", 2),
+("broccoli", "any" , 3),
+("cabbage", "any", 4),
+("carrot", "any", 1),
+("cauliflower", "any", 2),
+("corn", "any", 3),
+("cucumber", "any", 4),
+("eggplant", "any", 1),
+("lettuce", "any", 2),
+("mushrooms", "any", 3),
+("onion", "any", 4),
+("peas", "any", 1),
+("potato", "any", 4),
+("radishes", "any", 2),
+("tomato", "any", 3)]
 
+dessert_tuples = [
+("chocolate chip cookies", "any", 3),
+("apple pie", "any", 2),
+("cheese cake", "any", 1),
+("carrot cake", "any", 3),
+("icecream", "any", 2),
+("birthday cake", "any", 3),
+("cotton candy", "any", 2),
+("brownies", "any", 2),
+("pumpkin pie", "any", 3),
+("red velvet cake", "any", 2),
+("donut", "any", 2),
+("lollypop", "any", 1),
+("cherry pie", "any", 2)]
 
-
-
-
-
-
-
+meal_tuples = [
+("ramen", "any", 1),
+("sushi", "any", 1),
+("chow mein", "any", 2),
+("orange chicken", "any", 4),
+("roast chicken", "any", 2),
+("rice", "any", 3),
+("taco", "any", 4),
+("roast beef", "any", 3),
+("baked potato", "any", 2),
+("enchilado", "any", 3),
+("sandwich", "any", 2)
 ]
 
 
@@ -113,10 +150,31 @@ def drop_inventory_table():
 def create_item_table():
     cursor.execute('''CREATE TABLE Item(
     item_id INTEGER NOT NULL PRIMARY KEY,
-    type TEXT NOT NULL,
-    description TEXT NOT NULL,
+    name TEXT NOT NULL,
     user TEXT NOT NULL,
-    image BLOB NOT NULL);''')
+    value INTEGER NOT NULL,
+    image BLOB);''')
+
+def populate_item_table():
+    command = "INSERT INTO Item (name, user, value) VALUES (?, ?, ?)"
+    for i in fruit_tuples:
+        cursor.execute(command, i)
+
+    for i in vegetable_tuples:
+        cursor.execute(command, i)
+
+    for i in dessert_tuples:
+        cursor.execute(command, i)
+
+    for i in meal_tuples:
+        cursor.execute(command, i)
+
+def print_item_table():
+    data = cursor.execute("SELECT * FROM Item")
+    for i in data:
+        print(i)
+def drop_item_table():
+    cursor.execute('DROP TABLE IF EXISTS Item')
 
 # TASK TABLE ---------------------------------------
 def create_task_table():
@@ -138,8 +196,14 @@ drop_player_table()
 drop_account_table()
 drop_inventory_table()
 drop_task_table()
+drop_item_table()
 
+create_item_table()
 create_account_table()
 create_inventory_table()
 create_task_table()
 create_player_table()
+
+
+populate_item_table()
+print_item_table()
