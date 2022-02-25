@@ -7,11 +7,11 @@ cursor = connection.cursor()
 #Tuples
 # (level, coins, experience, strength, perception, intelligence, charisma)
 player_tuples = [
-(1, 120, 15, 2, 3, 4, 3),
-(3, 55, 32, 3, 3, 4, 3),
-(2, 72, 21, 1, 3, 4, 3),
-(3, 202, 9, 8, 3, 4, 3),
-(4, 130, 40, 2, 9, 4, 3)
+(NULL, NULL, NULL, NULL, 1, 120, 15, 2, 3, 4, 3),
+(NULL, NULL, NULL, NULL, 3, 55, 32, 3, 3, 4, 3),
+(NULL, NULL, NULL, NULL, 2, 72, 21, 1, 3, 4, 3),
+(NULL, NULL, NULL, NULL, 3, 202, 9, 8, 3, 4, 3),
+(NULL, NULL, NULL, NULL, 4, 130, 40, 2, 9, 4, 3)
 ]
 
 account_tuples = [
@@ -90,11 +90,10 @@ meal_tuples = [
 ("sandwich", "any", 2)
 ]
 
-
 # PLAYER TABLE------------------------------------------------------------------
 def create_player_table():
     cursor.execute('''CREATE TABLE Player(
-    player_id INTEGER NOT NULL PRIMARY KEY,
+    player_id INTEGER PRIMARY KEY,
     account_id INTEGER NOT NULL,
     tasks_id INTEGER NOT NULL,
     inventory_id INTEGER NOT NULL,
@@ -106,32 +105,43 @@ def create_player_table():
     intelligence INTEGER NOT NULL,
     charisma INTEGER NOT NULL,
     image BLOB,
-    FOREIGN KEY (account_id)
-        REFERENCES CLASS (Account),
-    FOREIGN KEY (tasks_id)
-        REFERENCES CLASS (Tasks),
-    FOREIGN KEY (inventory_id)
-        REFERENCES CLASS (Inventory));''')
+    FOREIGN KEY (account_id)REFERENCES Account (account_id),
+    FOREIGN KEY (tasks_id) REFERENCES Tasks (task_id),
+    FOREIGN KEY (inventory_id) REFERENCES Inventory (inventory_id));''')
 
 def populate_player_table():
-    command = "INSERT INTO Player (level, coins, experience, strength, perception, intelligence, charisma) VALUES (?, ?, ?, ?, ?, ?, ?)"
+    command = "INSERT INTO Player ( player_id, account_id, tasks_id, inventory_id, level, coins, experience, strength, perception, intelligence, charisma) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
     for i in player_tuples:
         cursor.execute(command, i)
 
 def drop_player_table():
     cursor.execute('DROP TABLE IF EXISTS Player')
 
+def print_player_table():
+    print("Player Table")
+    data = cursor.execute("SELECT * From Player")
+    for i in data:
+        print(i)
+
 #ACCOUNT TABLE ----------------------------------------------------------------
 def create_account_table():
     cursor.execute('''CREATE TABLE Account(
-    account_id INTEGER NOT NULL PRIMARY KEY,
+    account_id INTEGER PRIMARY KEY,
     email TEXT NOT NULL,
     username TEXT NOT NULL,
     password TEXT NOT NULL,
     isloggedin INTEGER NOT NULL);''')
 
 def populate_account_table():
-    pass
+    command = "INSERT INTO Account (email, username, password, isloggedin) VALUES (?, ?, ?, ?)"
+    for i in account_tuples:
+        cursor.execute(command, i)
+
+def print_account_table():
+    print("Account table")
+    data = cursor.execute( "SELECT * FROM Account")
+    for i in data:
+        print(i)
 
 def drop_account_table():
     cursor.execute('DROP TABLE IF EXISTS Account')
@@ -146,6 +156,8 @@ def create_inventory_table():
 def drop_inventory_table():
     cursor.execute('DROP TABLE IF EXISTS Inventory')
 
+def populate_inventory_table():
+    cursor.execute()
 #ITEM TABLE--------------------------------------------------------------------
 def create_item_table():
     cursor.execute('''CREATE TABLE Item(
@@ -204,6 +216,9 @@ create_inventory_table()
 create_task_table()
 create_player_table()
 
-
 populate_item_table()
-print_item_table()
+populate_account_table()
+populate_player_table()
+
+print_player_table()
+print_account_table()
