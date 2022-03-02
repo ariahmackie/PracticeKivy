@@ -30,8 +30,6 @@ FOREIGN KEY(ArtistId) REFERENCES Artists(ArtistsId))''')
 #cursor.execute('''INSERT INTO Albums VALUES (NULL, 'Cathy album', 1972 );''')
 #cursor.execute('''INSERT INTO Albums VALUES (NULL, 'Allison album', 1989);''')
 
-
-
 tables = cursor.execute("SELECT name FROM sqlite_master WHERE type = 'table';")
 print(tables.fetchall())
 

@@ -6,22 +6,6 @@ cursor = connection.cursor()
 
 #Tuples
 # (level, coins, experience, strength, perception, intelligence, charisma)
-player_tuples = [
-(NULL, NULL, NULL, NULL, 1, 120, 15, 2, 3, 4, 3),
-(NULL, NULL, NULL, NULL, 3, 55, 32, 3, 3, 4, 3),
-(NULL, NULL, NULL, NULL, 2, 72, 21, 1, 3, 4, 3),
-(NULL, NULL, NULL, NULL, 3, 202, 9, 8, 3, 4, 3),
-(NULL, NULL, NULL, NULL, 4, 130, 40, 2, 9, 4, 3)
-]
-
-account_tuples = [
-("aaa@gmail.com", "Alfred","123456", 0),
-("bbb@gmail.com", "Bob","123456", 0),
-("ccc@gmail.com", "Cessily","123456", 0),
-("ddd@gmail.com", "Danny","123456", 0),
-("eeea@gmail.com", "Emma","123456", 0)
-]
-
 
 #description, user, health_value
 fruit_tuples =[
@@ -93,10 +77,11 @@ meal_tuples = [
 # PLAYER TABLE------------------------------------------------------------------
 def create_player_table():
     cursor.execute('''CREATE TABLE Player(
-    player_id INTEGER PRIMARY KEY,
-    account_id INTEGER NOT NULL,
-    tasks_id INTEGER NOT NULL,
-    inventory_id INTEGER NOT NULL,
+    id INTEGER PRIMARY KEY,
+    email TEXT NOT NULL,
+    username TEXT NOT NULL,
+    password TEXT NOT NULL,
+    isloggedin INTEGER NOT NULL,
     level INTEGER NOT NULL,
     coins INTEGER NOT NULL,
     experience INTEGER NOT NULL,
@@ -104,15 +89,12 @@ def create_player_table():
     perception INTEGER NOT NULL,
     intelligence INTEGER NOT NULL,
     charisma INTEGER NOT NULL,
-    image BLOB,
-    FOREIGN KEY (account_id)REFERENCES Account (account_id),
-    FOREIGN KEY (tasks_id) REFERENCES Tasks (task_id),
-    FOREIGN KEY (inventory_id) REFERENCES Inventory (inventory_id));''')
+    image BLOB);''')
 
-def populate_player_table():
-    command = "INSERT INTO Player ( player_id, account_id, tasks_id, inventory_id, level, coins, experience, strength, perception, intelligence, charisma) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
-    for i in player_tuples:
-        cursor.execute(command, i)
+def add_new_player(email, username, password):
+    command = "INSERT INTO Player (email, username, password, isloggedin, level, coins, experience, strength, perception, intelligence, charisma) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
+    player_tuple = (email, username, password, 1, 1, 100, 0, 0, 0, 0, 0)
+    cursor.execute(command, player_tuple)
 
 def drop_player_table():
     cursor.execute('DROP TABLE IF EXISTS Player')
@@ -123,33 +105,10 @@ def print_player_table():
     for i in data:
         print(i)
 
-#ACCOUNT TABLE ----------------------------------------------------------------
-def create_account_table():
-    cursor.execute('''CREATE TABLE Account(
-    account_id INTEGER PRIMARY KEY,
-    email TEXT NOT NULL,
-    username TEXT NOT NULL,
-    password TEXT NOT NULL,
-    isloggedin INTEGER NOT NULL);''')
-
-def populate_account_table():
-    command = "INSERT INTO Account (email, username, password, isloggedin) VALUES (?, ?, ?, ?)"
-    for i in account_tuples:
-        cursor.execute(command, i)
-
-def print_account_table():
-    print("Account table")
-    data = cursor.execute( "SELECT * FROM Account")
-    for i in data:
-        print(i)
-
-def drop_account_table():
-    cursor.execute('DROP TABLE IF EXISTS Account')
-
 #INVENTORY TABLE ---------------------------------------------------------------
 def create_inventory_table():
     cursor.execute('''CREATE TABLE Inventory(
-    inventory_id INTEGER NOT NULL PRIMARY KEY,
+    id INTEGER NOT NULL PRIMARY KEY,
     count INTEGER NOT NULL,
     item_id INTEGER NOT NULL);''')
 
@@ -161,7 +120,7 @@ def populate_inventory_table():
 #ITEM TABLE--------------------------------------------------------------------
 def create_item_table():
     cursor.execute('''CREATE TABLE Item(
-    item_id INTEGER NOT NULL PRIMARY KEY,
+    id INTEGER NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
     user TEXT NOT NULL,
     value INTEGER NOT NULL,
@@ -191,7 +150,7 @@ def drop_item_table():
 # TASK TABLE ---------------------------------------
 def create_task_table():
     cursor.execute('''CREATE TABLE Tasks(
-    tasks_id INTEGER NOT NULL,
+    id INTEGER NOT NULL,
     description TEXT NOT NULL,
     duedate TEXT,
     value INTEGER NOT NULL,
@@ -203,22 +162,18 @@ def drop_task_table():
 def test():
     print("hello")
 
-test()
+
 drop_player_table()
-drop_account_table()
 drop_inventory_table()
 drop_task_table()
 drop_item_table()
 
 create_item_table()
-create_account_table()
 create_inventory_table()
 create_task_table()
 create_player_table()
 
 populate_item_table()
-populate_account_table()
-populate_player_table()
+add_new_player("adam@gmail.com", "adam", "abc123")
 
 print_player_table()
-print_account_table()
