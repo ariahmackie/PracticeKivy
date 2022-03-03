@@ -70,7 +70,7 @@ meal_tuples = [
 ("taco", "any", 4),
 ("roast beef", "any", 3),
 ("baked potato", "any", 2),
-("enchilado", "any", 3),
+("enchilada", "any", 3),
 ("sandwich", "any", 2)
 ]
 
@@ -96,14 +96,32 @@ def add_new_player(email, username, password):
     player_tuple = (email, username, password, 1, 1, 100, 0, 0, 0, 0, 0)
     cursor.execute(command, player_tuple)
 
+def get_xp(player_id):
+    player_id = (player_id,)
+    command = "SELECT experience WHERE id=?"
+    cursor.execute(command, player_id)
+    experience = cursor.fetchone()[0]
+    return experience
+
+def increase_xp(player_id, value):
+    prior_experience = get_xp(player_id)
+    experience = prior_experience + value
+    xp_tuple = (experience, player_id)
+    command = "UPDATE PLAYER SET experience=? WHERE id=?"
+    cursor.execute(command, xp_tuple)
+
+
 def drop_player_table():
     cursor.execute('DROP TABLE IF EXISTS Player')
 
 def print_player_table():
     print("Player Table")
+    player_tuple = ("id", 'email', "username", "password", "isloggedin", "level", "coins", "experience", "strength", "perception", "intelligence", "charisma", "image")
+    print(player_tuple)
     data = cursor.execute("SELECT * From Player")
     for i in data:
         print(i)
+    print("")
 
 #INVENTORY TABLE ---------------------------------------------------------------
 def create_inventory_table():
@@ -144,24 +162,54 @@ def print_item_table():
     data = cursor.execute("SELECT * FROM Item")
     for i in data:
         print(i)
+    print("")
+
 def drop_item_table():
     cursor.execute('DROP TABLE IF EXISTS Item')
 
 # TASK TABLE ---------------------------------------
 def create_task_table():
     cursor.execute('''CREATE TABLE Tasks(
-    id INTEGER NOT NULL,
+    id INTEGER PRIMARY KEY,
     description TEXT NOT NULL,
     duedate TEXT,
     value INTEGER NOT NULL,
-    is_repeatable INTEGER NOT NULL);''')
+    is_repeatable INTEGER NOT NULL,
+    person_id INTEGER NOT NULL,
+    complete INTEGER NOT NULL,
+    FOREIGN KEY(person_id) REFERENCES Player(id));''')
 
 def drop_task_table():
     cursor.execute('DROP TABLE IF EXISTS Tasks')
 
-def test():
-    print("hello")
+def create_task(description, duedate, value, is_repeatable, person_id):
+    command = "INSERT INTO Tasks (description, duedate, value, is_repeatable, person_id, complete) VALUES (?, ?, ?, ?, ?, ?)"
+    task_tuple = (description, duedate, value, is_repeatable, person_id, 0)
+    cursor.execute(command, task_tuple)
 
+def delete_task(task_id):
+    task_id = (task_id,)
+    command = "DELETE FROM Tasks WHERE id=?"
+    cursor.execute(command, task_id)
+
+def complete_task(task_id):
+    task_id = (task_id,)
+    command = "UPDATE Tasks SET complete = 1 WHERE id=?"
+    cursor.execute(command, task_id)
+    cursor.execute("SELECT value FROM Tasks WHERE id=?", task_id)
+    value = cursor.fetchone()[0]
+
+def get_player_id_from_task(task_id):
+    pass
+
+
+def print_task_table():
+    task_tuple = ("id", "description", "duedate", "value", "is_repeatable", "person_id", "complete")
+    print(task_tuple)
+    data = cursor.execute("SELECT * FROM Tasks")
+    for i in data:
+        print(i)
+    print('')
 
 drop_player_table()
 drop_inventory_table()
@@ -173,7 +221,8 @@ create_inventory_table()
 create_task_table()
 create_player_table()
 
-populate_item_table()
 add_new_player("adam@gmail.com", "adam", "abc123")
-
+create_task("walk the dog", "3-4-2021", 10, 0, 1)
+print("before completing task")
 print_player_table()
+complete_task(1)
