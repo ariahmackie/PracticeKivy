@@ -8,14 +8,15 @@ cursor = connection.cursor()
                                                                                                                             # (level, coins, experience, strength, perception, intelligence, charisma)
 
 #description, user, health_value
-fruit_tuples =[("apple", "any", 2), ("banana", "any", 3), ("berries", "any", 1), ("cherries", "any", 2), ("coconut", "any", 3), ("grapefruit", "any", 4), ("grapes", "any", 1), ("kiwi", "any", 2), ("lemon", "any", 3), ("lime", "any", 4), ("mango", "any", 1), ("orange", "any", 2), ("peach", "any", 3), ("pear", "any", 4), ("pineapple", "any", 1),("strawberries", "any", 2), ("watermelon", "any", 3)]
+fruit_tuples =[("apple", 2, "fruit"), ("banana", 3, "fruit"), ("berries", 1, "fruit"), ("cherries", 2, "fruit"), ("coconut", 3, "fruit"), ("grapefruit", 4, "fruit"), ("grapes", 1, "fruit"), ("kiwi", 2, "fruit"), ("lemon", 3, "fruit"), ("lime", 4, "fruit"), ("mango", 1, "fruit"), ("orange", 2, "fruit"), ("peach", 3, "fruit"), ("pear", 4, "fruit"), ("pineapple", 1, "fruit"),("strawberries", 2, "fruit"), ("watermelon", 3, "fruit")]
 
-vegetable_tuples = [("artichoke", "any", 1), ("asparagus", "any", 2), ("broccoli", "any" , 3), ("cabbage", "any", 4), ("carrot", "any", 1), ("cauliflower", "any", 2), ("corn", "any", 3), ("cucumber", "any", 4), ("eggplant", "any", 1), ("lettuce", "any", 2), ("mushrooms", "any", 3),("onion", "any", 4), ("peas", "any", 1), ("potato", "any", 4), ("radishes", "any", 2), ("tomato", "any", 3)]
+vegetable_tuples = [("artichoke", 1, "vegetable"), ("asparagus", 2, "vegetable"), ("broccoli", 3, "vegetable"), ("cabbage", 4, "vegetable"), ("carrot", 1, 'vegetable'), ("cauliflower", 2, "vegetable"), ("corn", 3, "vegetable"), ("cucumber", 4, "vegetable"), ("eggplant", 1, "vegetable"), ("lettuce", 2, "vegetable"), ("mushrooms", 3, "vegetable"),("onion", 4, "vegetable"), ("peas", 1, "vegetable"), ("potato", 4, "vegetable"), ("radishes", 2, "vegetable"), ("tomato", 3, "vegetable")]
 
-dessert_tuples = [("chocolate chip cookies", "any", 3), ("apple pie", "any", 2), ("cheese cake", "any", 1), ("carrot cake", "any", 3), ("icecream", "any", 2), ("birthday cake", "any", 3), ("cotton candy", "any", 2), ("brownies", "any", 2), ("pumpkin pie", "any", 3), ("red velvet cake", "any", 2), ("donut", "any", 2), ("lollypop", "any", 1), ("cherry pie", "any", 2)]
+dessert_tuples = [("chocolate chip cookies", 3, "dessert"), ("apple pie", 2, "dessert"), ("cheese cake", 1, "dessert"), ("carrot cake", 3, "dessert"), ("icecream", 2, "dessert"), ("birthday cake", 3, "dessert"), ("cotton candy", 2, "dessert"), ("brownies", 2, "dessert"), ("pumpkin pie", 3, "dessert"), ("red velvet cake", 2, "dessert"), ("donut", 2, "dessert"), ("lollypop", 1, "dessert"), ("cherry pie", 2, "dessert")]
 
-meal_tuples = [("ramen", "any", 1), ("sushi", "any", 1), ("chow mein", "any", 2), ("orange chicken", "any", 4), ("roast chicken", "any", 2), ("rice", "any", 3), ("taco", "any", 4), ("roast beef", "any", 3), ("baked potato", "any", 2), ("enchilada", "any", 3), ("sandwich", "any", 2)]
+meal_tuples = [("ramen", 1, "meal"), ("sushi", 1, "meal"), ("chow mein", 2, "meal"), ("orange chicken", 4, "meal"), ("roast chicken", 2, "meal"), ("rice", 3, "meal"), ("taco", 4, "meal"), ("roast beef", 3, "meal"), ("baked potato", 2, "meal"), ("enchilada", 3, "meal"), ("sandwich", 2, "meal")]
 
+food_tuples = fruit_tuples + vegetable_tuples + dessert_tuples + meal_tuples
 #--------------------- PLAYER TABLE------------------------------------------------------------------
 def create_player_table():
     cursor.execute('''CREATE TABLE Player(
@@ -27,6 +28,7 @@ def create_player_table():
     level INTEGER NOT NULL,
     coins INTEGER NOT NULL,
     experience INTEGER NOT NULL,
+    health INTEGER NOT NULL,
     strength INTEGER NOT NULL,
     perception INTEGER NOT NULL,
     intelligence INTEGER NOT NULL,
@@ -34,15 +36,99 @@ def create_player_table():
     image BLOB);''')
 
 def add_new_player(email, username, password):
-    command = "INSERT INTO Player (email, username, password, isloggedin, level, coins, experience, strength, perception, intelligence, charisma) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
-    player_tuple = (email, username, password, 1, 1, 100, 0, 0, 0, 0, 0)
+    command = "INSERT INTO Player (email, username, password, isloggedin, level, coins, experience, health, strength, perception, intelligence, charisma) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
+    player_tuple = (email, username, password, 1, 1, 100, 0, 100, 0, 0, 0, 0)
     cursor.execute(command, player_tuple)
 
-def get_xp(player_id):
-    command = "SELECT experience FROM Player WHERE id=?"
+def get_value_from_player(value_type, player_id):
+    command = "SELECT %s FROM Player WHERE id=?" % value_type
     cursor.execute(command, (player_id,))
-    experience = cursor.fetchone()[0]
+    value = cursor.fetchone()[0]
+    print(value)
+    return value
+
+def decrease_value_from_player(value_type, value, player_id):
+    pass
+
+def increase_value_from_player(value_type, value, player_id):
+    pass
+
+def change_value_from_player(value_type, value, player_id):
+    pass
+
+def get_email(player_id):
+    email = get_value_from_player("email", player_id)
+    return email
+
+def get_username(player_id):
+    username = get_value_from_player("username", player_id)
+    return username
+
+def get_password(player_id):
+    password = get_value_from_player("password", player_id)
+    return password
+
+def is_logged_in(player_id):
+    loggin_status = get_value_from_player("is_logged_in", player_id)
+    if loggin_status == 1:
+        return True
+    else:
+        return False
+
+def get_level(player_id):
+    level = get_value_from_player("level", player_id)
+    return level
+
+def get_coins(player_id):
+    coins = get_value_from_player("coins", player_id)
+    return coins
+
+def get_xp(player_id):
+    experience = get_value_from_player("experience", player_id)
     return experience
+
+def get_health(player_id):
+    health = get_value_from_player("health", player_id)
+    return health
+
+def get_strength(player_id):
+    strength = get_value_from_player("strength", player_id)
+    return strength
+
+def get_perception(player_id):
+    perception = get_value_from_player("perception", player_id)
+    return perception
+
+def get_intelligence(player_id):
+    intelligence = get_value_from_player("intelligence", player_id)
+    return intelligence
+
+def get_charisma(player_id):
+    charisma = get_value_from_player("charisma", player_id)
+    return charisma
+
+def get_image(player_id):
+    image = get_value_from_player("image", player_id)
+    return image
+
+
+def increase_health(player_id, value):
+    health = get_health(player_id)
+    if health + value >= 100:
+        print("health is full")
+        health = 100
+    else:
+        health = health + value
+    cursor.execute("UPDATE Player SET health=? WHERE id=?", (health, player_id))
+
+def decrease_health(player_id, value):
+    health = get_health(player_id)
+    if health - value <= 0:
+        print("health is 0")
+        health = 0
+    else:
+        health = health - value
+        cursor.execute("UPDATE Player SET health=? WHERE id=?", (health, player_id))
 
 def increase_xp(player_id, value):
     prior_experience = get_xp(player_id)
@@ -67,41 +153,78 @@ def print_player_table():
 def create_inventory_table():
     cursor.execute('''CREATE TABLE Inventory(
     id INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL,
     count INTEGER NOT NULL,
-    item_id INTEGER NOT NULL);''')
+    stock_id INTEGER NOT NULL,
+    player_id INTEGER NOT NULL,
+    FOREIGN KEY(player_id) REFERENCES Player(id),
+    FOREIGN KEY(stock_id) REFERENCES Stock(id));''')
 
 def drop_inventory_table():
     cursor.execute('DROP TABLE IF EXISTS Inventory')
 
+def add_item_by_id(item_id, player_id):
+    item_tuple = select_stockitem_by_id(item_id)
+    add_item(item_tuple, player_id)
+
+def add_item_by_name(item_name, player_id):
+    item_tuple = select_stockitem_by_name(item_name)
+    add_item(item_tuple, player_id)
+
+def add_item(item_tuple, player_id):
+    item_name = item_tuple[1]
+    stock_id = item_tuple[0]
+    #count = count_how_many_of_item(item_name, player_id)
+    count = 1
+    cursor.execute("INSERT INTO Inventory (name, stock_id, count, player_id) VALUES (?, ?, ?, ?)", (item_name, stock_id, count, player_id))
+
+def count_how_many_of_item(item_name, player_id):
+    cursor.execute("IF EXISTS(SELECT count FROM Inventory WHERE item_name=? AND player_id=?) SELECT 0", (item_name, player_id))
+    count = cursor.fetchone()
+    print(count)
+    return count
+
+def print_inventory_table():
+    print(("id", "name", "count", "stock_id", "player_id"))
+    values = cursor.execute("SELECT * FROM Inventory")
+    for x in values:
+        print(x)
 
 #-------------------------------ITEM TABLE--------------------------------------------------------------------
-def create_item_table():
-    cursor.execute('''CREATE TABLE Item(
+def create_stock_table():
+    cursor.execute('''CREATE TABLE Stock(
     id INTEGER NOT NULL PRIMARY KEY,
     name TEXT NOT NULL,
-    user TEXT NOT NULL,
     value INTEGER NOT NULL,
+    type TEXT NOT NULL,
     image BLOB);''')
 
-def populate_item_table():
-    command = "INSERT INTO Item (name, user, value) VALUES (?, ?, ?)"
-    for i in fruit_tuples:
-        cursor.execute(command, i)
-    for i in vegetable_tuples:
-        cursor.execute(command, i)
-    for i in dessert_tuples:
-        cursor.execute(command, i)
-    for i in meal_tuples:
+def select_stockitem_by_id(stock_id):
+    command = "SELECT * FROM Stock WHERE id=?"
+    cursor.execute(command, (stock_id,))
+    stockitem = cursor.fetchone()
+    return stockitem
+
+def select_stockitem_by_name(stock_name):
+    command = "SELECT * FROM Stock WHERE name=?"
+    cursor.execute(command, (stock_name,))
+    stockitem = cursor.fetchone()
+    return stockitem
+
+def populate_stock_table():
+    command = "INSERT INTO Stock (name, value, type) VALUES (?, ?, ?)"
+    for i in food_tuples:
         cursor.execute(command, i)
 
-def print_item_table():
-    data = cursor.execute("SELECT * FROM Item")
+def print_stock_table():
+    print("Stock Table")
+    data = cursor.execute("SELECT * FROM Stock")
     for i in data:
         print(i)
     print("")
 
-def drop_item_table():
-    cursor.execute('DROP TABLE IF EXISTS Item')
+def drop_stock_table():
+    cursor.execute('DROP TABLE IF EXISTS Stock')
 
 #--------------------------------TASK TABLE ---------------------------------------
 def create_task_table():
@@ -148,21 +271,26 @@ def print_task_table():
         print(i)
     print('')
 
+#--------------------All Tables ---------------------
+def drop_all_tables():
+    drop_player_table()
+    drop_inventory_table()
+    drop_task_table()
+    drop_stock_table()
+
+def create_all_tables():
+    create_stock_table()
+    create_inventory_table()
+    create_task_table()
+    create_player_table()
+
 #------------------TEST FUNCTIONS -----------------------
-drop_player_table()
-drop_inventory_table()
-drop_task_table()
-drop_item_table()
+drop_all_tables()
+create_all_tables()
 
-create_item_table()
-create_inventory_table()
-create_task_table()
-create_player_table()
+add_new_player("ralph@gmail.com", "ralph", "12345")
+add_new_player("bob@gmail.com", "bob", "12345")
+add_new_player("sam@gamail.com", "Sam", "12345")
+print_player_table()
 
-add_new_player("adam@gmail.com", "adam", "abc123")
-create_task("walk the dog", "3-4-2021", 10, 0, 1)
-print("before completing task")
-print_player_table()
-complete_task(1)
-print("after completing task")
-print_player_table()
+populate_stock_table()
