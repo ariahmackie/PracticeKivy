@@ -1,5 +1,6 @@
 '''Create Database for All Classes in RPG Game'''
 import sqlite3
+import random
 
 connection =sqlite3.connect("rpg_data.db")
 cursor = connection.cursor()
@@ -47,14 +48,19 @@ def get_value_from_player(value_type, player_id):
     print(value)
     return value
 
+def change_value_in_player(value_type, value, player_id):
+    command = "UPDATE Player SET %s = ? WHERE id=?" % value_type
+    cursor.execute(command, (value, value))
+
 def decrease_value_from_player(value_type, value, player_id):
-    pass
+    current_value = get_value_from_player(value_type, player_id)
+    updated_value = current_value - value
+    change_value_in_player(value_type, value, player_id)
 
-def increase_value_from_player(value_type, value, player_id):
-    pass
-
-def change_value_from_player(value_type, value, player_id):
-    pass
+def increase_value_in_player(value_type, value, player_id):
+    current_value = get_value_from_player(value_type, player_id)
+    updated_value = current_value + value
+    change_value_in_player(value_type, updated_value, player_id)
 
 def get_email(player_id):
     email = get_value_from_player("email", player_id)
@@ -111,7 +117,6 @@ def get_image(player_id):
     image = get_value_from_player("image", player_id)
     return image
 
-
 def increase_health(player_id, value):
     health = get_health(player_id)
     if health + value >= 100:
@@ -121,6 +126,25 @@ def increase_health(player_id, value):
         health = health + value
     cursor.execute("UPDATE Player SET health=? WHERE id=?", (health, player_id))
 
+#value_type, value, player_id
+def increase_level(player_id):
+    increase_value_in_player("level", 1, player_id)
+
+def increase_xp(player_id, value):
+    increase_value_in_player("experience", value, player_id)
+
+def increase_coins(player_id, value):
+    increase_value_in_player("coins", value, player_id)
+
+def increase_strength(player_id):
+    increase_value_in_player("strength", 1, player_id)
+
+def increase_intelligence(player_id):
+    increase_value_in_player("intelligence", 1, player_id)
+
+def increase_charisma(player_id):
+    increase_value_in_player("charisma", 1, player_id)
+
 def decrease_health(player_id, value):
     health = get_health(player_id)
     if health - value <= 0:
@@ -129,13 +153,6 @@ def decrease_health(player_id, value):
     else:
         health = health - value
         cursor.execute("UPDATE Player SET health=? WHERE id=?", (health, player_id))
-
-def increase_xp(player_id, value):
-    prior_experience = get_xp(player_id)
-    experience = prior_experience + value
-    xp_tuple = (experience, player_id)
-    command = "UPDATE PLAYER SET experience=? WHERE id=?"
-    cursor.execute(command, xp_tuple)
 
 def drop_player_table():
     cursor.execute('DROP TABLE IF EXISTS Player')
@@ -162,6 +179,10 @@ def create_inventory_table():
 
 def drop_inventory_table():
     cursor.execute('DROP TABLE IF EXISTS Inventory')
+
+def add_a_prize(player_id):
+    item_id = get_random_item()
+    add_item_by_id(item_id, player_id)
 
 def add_item_by_id(item_id, player_id):
     item_tuple = select_stockitem_by_id(item_id)
@@ -215,6 +236,18 @@ def populate_stock_table():
     command = "INSERT INTO Stock (name, value, type) VALUES (?, ?, ?)"
     for i in food_tuples:
         cursor.execute(command, i)
+
+def get_num_items_in_stock():
+    command = "SELECT COUNT(*) FROM Stock"
+    cursor.execute(command)
+    num_items = cursor.fetchone()[0]
+    return num_items
+
+def get_random_item():
+    num_items = get_num_items_in_stock()
+    id_list = range(1, num_items, 1)
+    item = random.choice(id_list)
+    return item
 
 def print_stock_table():
     print("Stock Table")
@@ -294,3 +327,9 @@ add_new_player("sam@gamail.com", "Sam", "12345")
 print_player_table()
 
 populate_stock_table()
+
+
+add_a_prize(1)
+add_a_prize(1)
+add_a_prize(1)
+print_inventory_table()
