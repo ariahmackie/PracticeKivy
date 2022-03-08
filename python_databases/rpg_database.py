@@ -2,22 +2,11 @@
 import sqlite3
 import random
 
+#connect to database and cursor
+
 connection =sqlite3.connect("rpg_data.db")
 cursor = connection.cursor()
 
-#Tuples
-                                                                                                                            # (level, coins, experience, strength, perception, intelligence, charisma)
-
-#description, user, health_value
-fruit_tuples =[("apple", 2, "fruit"), ("banana", 3, "fruit"), ("berries", 1, "fruit"), ("cherries", 2, "fruit"), ("coconut", 3, "fruit"), ("grapefruit", 4, "fruit"), ("grapes", 1, "fruit"), ("kiwi", 2, "fruit"), ("lemon", 3, "fruit"), ("lime", 4, "fruit"), ("mango", 1, "fruit"), ("orange", 2, "fruit"), ("peach", 3, "fruit"), ("pear", 4, "fruit"), ("pineapple", 1, "fruit"),("strawberries", 2, "fruit"), ("watermelon", 3, "fruit")]
-
-vegetable_tuples = [("artichoke", 1, "vegetable"), ("asparagus", 2, "vegetable"), ("broccoli", 3, "vegetable"), ("cabbage", 4, "vegetable"), ("carrot", 1, 'vegetable'), ("cauliflower", 2, "vegetable"), ("corn", 3, "vegetable"), ("cucumber", 4, "vegetable"), ("eggplant", 1, "vegetable"), ("lettuce", 2, "vegetable"), ("mushrooms", 3, "vegetable"),("onion", 4, "vegetable"), ("peas", 1, "vegetable"), ("potato", 4, "vegetable"), ("radishes", 2, "vegetable"), ("tomato", 3, "vegetable")]
-
-dessert_tuples = [("chocolate chip cookies", 3, "dessert"), ("apple pie", 2, "dessert"), ("cheese cake", 1, "dessert"), ("carrot cake", 3, "dessert"), ("icecream", 2, "dessert"), ("birthday cake", 3, "dessert"), ("cotton candy", 2, "dessert"), ("brownies", 2, "dessert"), ("pumpkin pie", 3, "dessert"), ("red velvet cake", 2, "dessert"), ("donut", 2, "dessert"), ("lollypop", 1, "dessert"), ("cherry pie", 2, "dessert")]
-
-meal_tuples = [("ramen", 1, "meal"), ("sushi", 1, "meal"), ("chow mein", 2, "meal"), ("orange chicken", 4, "meal"), ("roast chicken", 2, "meal"), ("rice", 3, "meal"), ("taco", 4, "meal"), ("roast beef", 3, "meal"), ("baked potato", 2, "meal"), ("enchilada", 3, "meal"), ("sandwich", 2, "meal")]
-
-food_tuples = fruit_tuples + vegetable_tuples + dessert_tuples + meal_tuples
 #--------------------- PLAYER TABLE------------------------------------------------------------------
 def create_player_table():
     cursor.execute('''CREATE TABLE Player(
@@ -78,8 +67,7 @@ def is_logged_in(player_id):
     loggin_status = get_value_from_player("is_logged_in", player_id)
     if loggin_status == 1:
         return True
-    else:
-        return False
+    return False
 
 def get_level(player_id):
     level = get_value_from_player("level", player_id)
@@ -124,7 +112,7 @@ def increase_health(player_id, value):
         health = 100
     else:
         health = health + value
-    cursor.execute("UPDATE Player SET health=? WHERE id=?", (health, player_id))
+    change_value_in_player("health", health, player_id)
 
 #value_type, value, player_id
 def increase_level(player_id):
@@ -152,7 +140,7 @@ def decrease_health(player_id, value):
         health = 0
     else:
         health = health - value
-        cursor.execute("UPDATE Player SET health=? WHERE id=?", (health, player_id))
+        change_value_in_player("health", health, player_id)
 
 def drop_player_table():
     cursor.execute('DROP TABLE IF EXISTS Player')
@@ -212,6 +200,18 @@ def print_inventory_table():
         print(x)
 
 #-------------------------------ITEM TABLE--------------------------------------------------------------------
+                                                                                                                            # (level, coins, experience, strength, perception, intelligence, charisma)
+fruit_tuples =[("apple", 2, "fruit"), ("banana", 3, "fruit"), ("berries", 1, "fruit"), ("cherries", 2, "fruit"), ("coconut", 3, "fruit"), ("grapefruit", 4, "fruit"), ("grapes", 1, "fruit"), ("kiwi", 2, "fruit"), ("lemon", 3, "fruit"), ("lime", 4, "fruit"), ("mango", 1, "fruit"), ("orange", 2, "fruit"), ("peach", 3, "fruit"), ("pear", 4, "fruit"), ("pineapple", 1, "fruit"),("strawberries", 2, "fruit"), ("watermelon", 3, "fruit")]
+
+vegetable_tuples = [("artichoke", 1, "vegetable"), ("asparagus", 2, "vegetable"), ("broccoli", 3, "vegetable"), ("cabbage", 4, "vegetable"), ("carrot", 1, 'vegetable'), ("cauliflower", 2, "vegetable"), ("corn", 3, "vegetable"), ("cucumber", 4, "vegetable"), ("eggplant", 1, "vegetable"), ("lettuce", 2, "vegetable"), ("mushrooms", 3, "vegetable"),("onion", 4, "vegetable"), ("peas", 1, "vegetable"), ("potato", 4, "vegetable"), ("radishes", 2, "vegetable"), ("tomato", 3, "vegetable")]
+
+dessert_tuples = [("chocolate chip cookies", 3, "dessert"), ("apple pie", 2, "dessert"), ("cheese cake", 1, "dessert"), ("carrot cake", 3, "dessert"), ("icecream", 2, "dessert"), ("birthday cake", 3, "dessert"), ("cotton candy", 2, "dessert"), ("brownies", 2, "dessert"), ("pumpkin pie", 3, "dessert"), ("red velvet cake", 2, "dessert"), ("donut", 2, "dessert"), ("lollypop", 1, "dessert"), ("cherry pie", 2, "dessert")]
+
+meal_tuples = [("ramen", 1, "meal"), ("sushi", 1, "meal"), ("chow mein", 2, "meal"), ("orange chicken", 4, "meal"), ("roast chicken", 2, "meal"), ("rice", 3, "meal"), ("taco", 4, "meal"), ("roast beef", 3, "meal"), ("baked potato", 2, "meal"), ("enchilada", 3, "meal"), ("sandwich", 2, "meal")]
+
+food_tuples = fruit_tuples + vegetable_tuples + dessert_tuples + meal_tuples
+
+
 def create_stock_table():
     cursor.execute('''CREATE TABLE Stock(
     id INTEGER NOT NULL PRIMARY KEY,
@@ -279,6 +279,10 @@ def create_task(description, duedate, value, is_repeatable, person_id):
     task_tuple = (description, duedate, value, is_repeatable, person_id, 0)
     cursor.execute(command, task_tuple)
 
+def change_value_in_task(value_type, value, id):
+    command = "UPDATE Tasks SET %s = ? WHERE id=?" % value_type
+    cursor.execute(command, (value, value))
+
 def delete_task(task_id):
     command = "DELETE FROM Tasks WHERE id=?"
     cursor.execute(command, (task_id,))
@@ -318,18 +322,3 @@ def create_all_tables():
     create_player_table()
 
 #------------------TEST FUNCTIONS -----------------------
-drop_all_tables()
-create_all_tables()
-
-add_new_player("ralph@gmail.com", "ralph", "12345")
-add_new_player("bob@gmail.com", "bob", "12345")
-add_new_player("sam@gamail.com", "Sam", "12345")
-print_player_table()
-
-populate_stock_table()
-
-
-add_a_prize(1)
-add_a_prize(1)
-add_a_prize(1)
-print_inventory_table()
