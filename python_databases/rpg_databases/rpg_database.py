@@ -43,74 +43,20 @@ def get_value_from_player(value_type, player_id):
 
 def change_value_in_player(value_type, value, player_id):
     command = "UPDATE Player SET %s = ? WHERE id=?" % value_type
-    cursor.execute(command, (value, value))
+    cursor.execute(command, (value, player_id))
 
 def decrease_value_from_player(value_type, value, player_id):
     current_value = get_value_from_player(value_type, player_id)
     updated_value = current_value - value
-    change_value_in_player(value_type, value, player_id)
+    change_value_in_player(value_type, updated_value, player_id)
 
 def increase_value_in_player(value_type, value, player_id):
     current_value = get_value_from_player(value_type, player_id)
     updated_value = current_value + value
     change_value_in_player(value_type, updated_value, player_id)
 
-def get_email(player_id):
-    email = get_value_from_player("email", player_id)
-    return email
-
-def get_username(player_id):
-    username = get_value_from_player("username", player_id)
-    return username
-
-def get_password( player_id):
-    password = get_value_from_player("password", player_id)
-    return password
-
-def is_logged_in(player_id):
-    loggin_status = get_value_from_player("is_logged_in", player_id)
-    if loggin_status == 1:
-        return True
-    return False
-
-def get_level(player_id):
-    level = get_value_from_player("level", player_id)
-    return level
-
-def get_coins(player_id):
-    coins = get_value_from_player("coins", player_id)
-    return coins
-
-def get_xp(player_id):
-    experience = get_value_from_player("experience", player_id)
-    return experience
-
-def get_health(player_id):
-    health = get_value_from_player("health", player_id)
-    return health
-
-def get_strength(player_id):
-    strength = get_value_from_player("strength", player_id)
-    return strength
-
-def get_perception(player_id):
-    perception = get_value_from_player("perception", player_id)
-    return perception
-
-def get_intelligence(player_id):
-    intelligence = get_value_from_player("intelligence", player_id)
-    return intelligence
-
-def get_charisma(player_id):
-    charisma = get_value_from_player("charisma", player_id)
-    return charisma
-
-def get_image(player_id):
-    image = get_value_from_player("image", player_id)
-    return image
-
 def increase_health(player_id, value):
-    health = get_health(player_id)
+    health = get_value_from_player("health", player_id)
     if health + value >= 100:
         print("health is full")
         health = 100
@@ -118,45 +64,27 @@ def increase_health(player_id, value):
         health = health + value
     change_value_in_player("health", health, player_id)
 
-#value_type, value, player_id
-def increase_level(player_id):
-    increase_value_in_player("level", 1, player_id)
-
-def increase_xp(player_id, value):
-    increase_value_in_player("experience", value, player_id)
-
-def increase_coins(player_id, value):
-    increase_value_in_player("coins", value, player_id)
-
-def increase_strength(player_id):
-    increase_value_in_player("strength", 1, player_id)
-
-def increase_intelligence(player_id):
-    increase_value_in_player("intelligence", 1, player_id)
-
-def increase_charisma(player_id):
-    increase_value_in_player("charisma", 1, player_id)
 
 def decrease_health(player_id, value):
-    health = get_health(player_id)
+    health = get_value_from_player("health", player_id)
     if health - value <= 0:
         print("health is 0")
         health = 0
     else:
         health = health - value
-        change_value_in_player("health", health, player_id)
+    change_value_in_player("health", health, player_id)
 
 def drop_player_table():
     cursor.execute('DROP TABLE IF EXISTS Player')
 
-# def print_player_table():
-#     print("Player Table")
-#     player_tuple = ("id", 'email', "username", "password", "isloggedin", "level", "coins", "experience", "strength", "perception", "intelligence", "charisma", "image")
-#     print(player_tuple)
-#     data = cursor.execute("SELECT * From Player")
-#     for i in data:
-#         print(i)
-#     print("")
+def print_player_table():
+    print("Player Table")
+    player_tuple = ("id", 'email', "username", "password", "isloggedin", "level", "coins", "experience", "strength", "perception", "intelligence", "charisma", "image")
+    print(player_tuple)
+    data = cursor.execute("SELECT * From Player")
+    for i in data:
+        print(i)
+    print("")
 
 #-----------------------------INVENTORY TABLE ---------------------------------------------------------------
 def create_inventory_table():
@@ -175,6 +103,9 @@ def drop_inventory_table():
 def add_a_prize(player_id):
     item_id = get_random_item()
     add_item_by_id(item_id, player_id)
+
+def get_item_by_id(id):
+    cursor.execute("SELECT * FROM INVENTORY")
 
 def add_item_by_id(item_id, player_id):
     item_tuple = select_stockitem_by_id(item_id)
