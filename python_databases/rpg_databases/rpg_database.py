@@ -105,7 +105,9 @@ def add_a_prize(player_id):
     add_item_by_id(item_id, player_id)
 
 def get_item_by_id(id):
-    cursor.execute("SELECT * FROM INVENTORY")
+    cursor.execute("SELECT * FROM INVENTORY WHERE id=?", (id,))
+    item = cursor.fetchone()
+    return item
 
 def add_item_by_id(item_id, player_id):
     item_tuple = select_stockitem_by_id(item_id)
@@ -123,7 +125,7 @@ def add_item(item_tuple, player_id):
     cursor.execute("INSERT INTO Inventory (name, stock_id, count, player_id) VALUES (?, ?, ?, ?)", (item_name, stock_id, count, player_id))
 
 def count_how_many_of_item(item_name, player_id):
-    cursor.execute("IF EXISTS(SELECT count FROM Inventory WHERE item_name=? AND player_id=?) SELECT 0", (item_name, player_id))
+    cursor.execute("IF EXISTS(SELECT count FROM Inventory WHERE item_name=? AND player_id=?) ELSE SELECT 0", (item_name, player_id))
     count = cursor.fetchone()
     print(count)
     return count

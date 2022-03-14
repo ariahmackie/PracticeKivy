@@ -11,8 +11,9 @@ class TestPlayerTable(unittest.TestCase):
 
     def set_up_inventory(self):
         self.set_up_player()
+        rpg.create_stock_table()
+        rpg.populate_stock_table()
         rpg.create_inventory_table()
-
 
     def drop_tables(self):
         rpg.drop_all_tables()
@@ -77,9 +78,37 @@ class TestPlayerTable(unittest.TestCase):
         self.drop_tables()
 
     def test_add_item_by_id(self):
+        self.set_up_inventory()
         rpg.add_item_by_id(2, 1)
-        
+        actual_item = rpg.get_item_by_id(1)
+        expected_item = (1, "banana", 1,  2, 1)
+        self.assertEqual(actual_item, expected_item, "should return banana item")
+        self.drop_tables()
 
+    def test_add_item_by_name(self):
+        self.set_up_inventory()
+        rpg.add_item_by_name("berries", 1)
+        actual_item = rpg.get_item_by_id(1)
+        expected_item = (1, "berries", 1, 3, 1)
+        self.assertEqual(actual_item, expected_item, "item should be berries")
+        self.drop_tables()
+
+    def test_add_item(self):
+        self.set_up_inventory()
+        item_tuple = (1, "cheese", 2, "meal")
+        rpg.add_item(item_tuple, 1)
+        actual_item = rpg.get_item_by_id(1)
+        expected_item = (1, "cheese", 1, 1, 1)
+        self.assertEqual(actual_item, expected_item, "item should be cheese")
+        self.drop_tables()
+
+    def test_count_how_many_of_item(self):
+        self.set_up_inventory()
+        rpg.add_item_by_id(1, 1)
+        actual_count = rpg.count_how_many_of_item("apple", 1)
+        expected_count = 1
+        self.assertEqual(actual_count, expected_count, "count should be 1")
+        self.drop_tables()
 
 
 
