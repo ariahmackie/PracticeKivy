@@ -15,6 +15,11 @@ class TestPlayerTable(unittest.TestCase):
         rpg.populate_stock_table()
         rpg.create_inventory_table()
 
+    def set_up_tasks(self):
+        self.set_up_player()
+        rpg.create_task_table()
+
+
     def drop_tables(self):
         rpg.drop_all_tables()
 
@@ -109,6 +114,36 @@ class TestPlayerTable(unittest.TestCase):
         expected_count = 1
         self.assertEqual(actual_count, expected_count, "count should be 1")
         self.drop_tables()
+
+    def test_select_stockitem_by_id(self):
+        self.set_up_inventory()
+        actual_item = rpg.select_stockitem_by_id(1)
+        expected_item = (1, "apple", 2, "fruit", None)
+        self.assertEqual(actual_item, expected_item, "Should return apple tuple")
+        self.drop_tables()
+
+    def test_select_stockitem_by_name(self):
+        self.set_up_inventory()
+        actual_item = rpg.select_stockitem_by_name("apple")
+        expected_item = (1, "apple", 2, "fruit", None)
+        self.assertEqual(actual_item, expected_item, "should return apple tuple")
+        self.drop_tables()
+
+    def test_get_num_items_in_stock(self):
+        self.set_up_inventory()
+        expected_number = 57
+        actual_number = rpg.get_num_items_in_stock()
+        self.assertEqual(actual_number, expected_number, "should return 57")
+        self.drop_tables()
+
+    def test_create_task_and_get_task(self):
+        self.set_up_tasks()
+        rpg.create_task("work on homework", "3-12-21", 4,  0, 1)
+        actual_task = rpg.get_task_by_id()
+        
+
+
+
 
 
 

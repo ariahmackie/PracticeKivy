@@ -101,7 +101,7 @@ def drop_inventory_table():
     cursor.execute('DROP TABLE IF EXISTS Inventory')
 
 def add_a_prize(player_id):
-    item_id = get_random_item()
+    item_id = get_random_itemid()
     add_item_by_id(item_id, player_id)
 
 def get_item_by_id(id):
@@ -125,9 +125,8 @@ def add_item(item_tuple, player_id):
     cursor.execute("INSERT INTO Inventory (name, stock_id, count, player_id) VALUES (?, ?, ?, ?)", (item_name, stock_id, count, player_id))
 
 def count_how_many_of_item(item_name, player_id):
-    cursor.execute("IF EXISTS(SELECT count FROM Inventory WHERE item_name=? AND player_id=?) ELSE SELECT 0", (item_name, player_id))
-    count = cursor.fetchone()
-    print(count)
+    cursor.execute("SELECT count FROM Inventory WHERE name=? AND player_id=?", (item_name, player_id))
+    count = cursor.fetchone()[0]
     return count
 
 def print_inventory_table():
@@ -147,7 +146,7 @@ dessert_tuples = [("chocolate chip cookies", 3, "dessert"), ("apple pie", 2, "de
 meal_tuples = [("ramen", 1, "meal"), ("sushi", 1, "meal"), ("chow mein", 2, "meal"), ("orange chicken", 4, "meal"), ("roast chicken", 2, "meal"), ("rice", 3, "meal"), ("taco", 4, "meal"), ("roast beef", 3, "meal"), ("baked potato", 2, "meal"), ("enchilada", 3, "meal"), ("sandwich", 2, "meal")]
 
 food_tuples = fruit_tuples + vegetable_tuples + dessert_tuples + meal_tuples
-
+print(len(fruit_tuples) + len(vegetable_tuples) + len(dessert_tuples) + len(meal_tuples))
 
 def create_stock_table():
     cursor.execute('''CREATE TABLE Stock(
@@ -180,11 +179,11 @@ def get_num_items_in_stock():
     num_items = cursor.fetchone()[0]
     return num_items
 
-def get_random_item():
+def get_random_itemid():
     num_items = get_num_items_in_stock()
     id_list = range(1, num_items, 1)
-    item = random.choice(id_list)
-    return item
+    item_id = random.choice(id_list)
+    return item_id
 
 def print_stock_table():
     print("Stock Table")
@@ -215,6 +214,12 @@ def create_task(description, duedate, value, is_repeatable, person_id):
     command = "INSERT INTO Tasks (description, duedate, value, is_repeatable, player_id, complete) VALUES (?, ?, ?, ?, ?, ?)"
     task_tuple = (description, duedate, value, is_repeatable, person_id, 0)
     cursor.execute(command, task_tuple)
+
+def get_task_by_id(id):
+    pass
+
+def get_task_by_name(name):
+    pass
 
 def change_value_in_task(value_type, value, id):
     command = "UPDATE Tasks SET %s = ? WHERE id=?" % value_type
