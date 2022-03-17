@@ -19,7 +19,6 @@ class TestPlayerTable(unittest.TestCase):
         self.set_up_player()
         rpg.create_task_table()
 
-
     def drop_tables(self):
         rpg.drop_all_tables()
 
@@ -139,8 +138,24 @@ class TestPlayerTable(unittest.TestCase):
     def test_create_task_and_get_task(self):
         self.set_up_tasks()
         rpg.create_task("work on homework", "3-12-21", 4,  0, 1)
-        actual_task = rpg.get_task_by_id()
-        
+        actual_task = rpg.get_task_by_id(1)
+        expected_task = (1, "work on homework", "3-12-21", 4, 0, 1, 0)
+        self.assertEqual(actual_task, expected_task, "should return same task")
+        self.drop_tables()
+
+    def test_return_all_task_by_player(self):
+        self.set_up_tasks()
+        rpg.create_task("person 1 task 1", "date", 4, 0, 1)
+        rpg.create_task("person 1 task 2", "date", 4, 0, 1)
+        rpg.create_task("person 1 task 3", "date", 4, 0, 1)
+        rpg.create_task("person 2 task 1", "date", 4, 0, 2)
+        rpg.create_task("person 2 task 2", "date", 4, 0, 2)
+        tasks = rpg.return_player_tasks(1)
+        actual_tasklist = []
+        expected_tasklist = [(), (), ()]
+        for i in tasks:
+            actual_tasklist.append(i)
+        self.assertEqual()
 
 
 

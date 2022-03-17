@@ -215,11 +215,17 @@ def create_task(description, duedate, value, is_repeatable, person_id):
     task_tuple = (description, duedate, value, is_repeatable, person_id, 0)
     cursor.execute(command, task_tuple)
 
-def get_task_by_id(id):
-    pass
+def get_task_by_id(task_id):
+    command = "SELECT * From Tasks WHERE id=?"
+    cursor.execute(command, (task_id,))
+    task = cursor.fetchone()
+    return task
 
-def get_task_by_name(name):
-    pass
+def return_player_tasks(player_id):
+    command = "SELECT * FROM Tasks where player_id=?"
+    cursor.execute(command, (player_id,))
+    tasks = cursor.fetchall()
+    return tasks
 
 def change_value_in_task(value_type, value, id):
     command = "UPDATE Tasks SET %s = ? WHERE id=?" % value_type
@@ -241,6 +247,9 @@ def get_playerid_from_taskid(task_id):
     cursor.execute("SELECT player_id FROM Tasks WHERE id=?", (task_id,))
     player_id = cursor.fetchone()[0]
     return player_id
+
+
+
 
 def print_task_table():
     task_tuple = ("id", "description", "duedate", "value", "is_repeatable", "player_id", "complete")
