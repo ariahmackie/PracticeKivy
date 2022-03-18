@@ -222,7 +222,10 @@ def get_task_by_id(task_id):
     return task
 
 def get_task_feature_by_id(feature, task_id):
-    pass
+    command = "SELECT %s FROM Tasks where id=?" %feature
+    cursor.execute(command, (task_id, ))
+    feature = cursor.fetchone()[0]
+    return feature
 
 def return_player_tasks(player_id):
     command = "SELECT * FROM Tasks where player_id=?"
@@ -275,4 +278,8 @@ def create_all_tables():
     create_task_table()
     create_player_table()
 
+
+def close_connection():
+    cursor.close()
+    connection.close()
 #------------------TEST FUNCTIONS -----------------------

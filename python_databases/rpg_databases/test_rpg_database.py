@@ -5,6 +5,11 @@ class TestPlayerTable(unittest.TestCase):
     def setUp(self):
         rpg.drop_all_tables()
 
+
+    def tearDown(self):
+        pass
+
+
     def set_up_player(self):
         rpg.create_player_table()
         rpg.add_new_player("adm@gmail.com", "Adam", "1234")
@@ -167,6 +172,13 @@ class TestPlayerTable(unittest.TestCase):
         expected_task = (1, "mow lawn", "date", 4, 0, 1, 0)
         self.assertEqual(actual_task, expected_task, "task should be the same")
         self.drop_tables()
+
+    def test_get_task_feature_by_id(self):
+        self.set_up_tasks()
+        rpg.create_task("mow lawn", "date", 4, 0, 1)
+        actual_date = rpg.get_task_feature_by_id("duedate", 1)
+        expected_date = "date"
+        self.assertEqual(actual_date, expected_date, "dates should be the same string")
 
 
 
