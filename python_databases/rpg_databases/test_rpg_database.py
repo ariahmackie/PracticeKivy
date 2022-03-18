@@ -152,10 +152,22 @@ class TestPlayerTable(unittest.TestCase):
         rpg.create_task("person 2 task 2", "date", 4, 0, 2)
         tasks = rpg.return_player_tasks(1)
         actual_tasklist = []
-        expected_tasklist = [(), (), ()]
+        #(id, description, duedate, value, isreeapable, playerid, complete)
+        expected_tasklist = [(1, "person 1 task 1", "date", 4, 0, 1, 0), (2, "person 1 task 2", "date", 4, 0, 1, 0), (3,"person 1 task 3", "date", 4, 0, 1, 0)]
         for i in tasks:
             actual_tasklist.append(i)
-        self.assertEqual()
+        self.assertEqual(actual_tasklist, expected_tasklist, "should be a list of only tasks from player 1")
+        self.drop_tables()
+
+    def test_change_value_in_task(self):
+        self.set_up_tasks()
+        rpg.create_task("person 1 task 1", "date", 4, 0, 1)
+        rpg.change_value_in_task("description", "mow lawn", 1)
+        actual_task = rpg.get_task_by_id(1)
+        expected_task = (1, "mow lawn", "date", 4, 0, 1, 0)
+        self.assertEqual(actual_task, expected_task, "task should be the same")
+        self.drop_tables()
+
 
 
 

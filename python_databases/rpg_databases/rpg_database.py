@@ -221,6 +221,9 @@ def get_task_by_id(task_id):
     task = cursor.fetchone()
     return task
 
+def get_task_feature_by_id(feature, task_id):
+    pass
+
 def return_player_tasks(player_id):
     command = "SELECT * FROM Tasks where player_id=?"
     cursor.execute(command, (player_id,))
@@ -229,7 +232,7 @@ def return_player_tasks(player_id):
 
 def change_value_in_task(value_type, value, id):
     command = "UPDATE Tasks SET %s = ? WHERE id=?" % value_type
-    cursor.execute(command, (value, value))
+    cursor.execute(command, (value, id))
 
 def delete_task(task_id):
     command = "DELETE FROM Tasks WHERE id=?"
