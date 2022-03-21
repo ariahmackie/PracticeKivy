@@ -247,14 +247,12 @@ def complete_task(task_id):
     cursor.execute("SELECT value FROM Tasks WHERE id=?", (task_id,))
     value = cursor.fetchone()[0]
     player_id = get_playerid_from_taskid(task_id)
-    increase_xp(player_id, value)
+    
 
 def get_playerid_from_taskid(task_id):
     cursor.execute("SELECT player_id FROM Tasks WHERE id=?", (task_id,))
     player_id = cursor.fetchone()[0]
     return player_id
-
-
 
 
 def print_task_table():

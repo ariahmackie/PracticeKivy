@@ -179,9 +179,26 @@ class TestPlayerTable(unittest.TestCase):
         actual_date = rpg.get_task_feature_by_id("duedate", 1)
         expected_date = "date"
         self.assertEqual(actual_date, expected_date, "dates should be the same string")
+        self.drop_tables()
 
+    def test_delete_task(self):
+        self.set_up_tasks()
+        rpg.create_task("mow lawn", "date", 4, 0, 1)
+        rpg.create_task("pay insurance", "date", 4, 0, 1)
+        rpg.delete_task(1)
+        leftover_task = rpg.return_player_tasks(1)[0]
+        expected_task = (2, "pay insurance", "date", 4, 0, 1, 0)
+        self.assertEqual(leftover_task, expected_task, "2nd tasks should be left")
+        self.drop_tables()
 
-
+    def test_complete_task(self):
+        self.set_up_tasks()
+        rpg.create_task("mow lawn", "date", 4, 0, 1)
+        rpg.complete_task(1)
+        actual_task = rpg.get_task_by_id(1)
+        expected_task = (1, "mow lawn", "date", 4, 0, 1, 1)
+        self.assertEqual(actual_task, expected_task, "last feature should be a 1 now that the test is complete")
+        self.drop_tables()
 
 
 
