@@ -2,12 +2,14 @@ import string
 import re
 import random
 from Model.email import Email
+import rpg_database as db
 
-def get_registered_player_via_username(username, players): #createaccount_login_forgot_password helpers
-    for player in players:
-        if player.player_account.username == username:
-            return player
-    return 0
+def get_registered_player_via_username(username): #createaccount_login_forgot_password helpers
+    player = db.find_players_with_feature("username", username)
+    if player is None:
+        return 0
+    player_id = player[0]
+    return player_id
 
 def get_registered_player_via_email(email, players): #createaccount_login_forgot_password helpers
     for player in players:
