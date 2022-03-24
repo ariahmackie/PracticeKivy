@@ -2,6 +2,7 @@
 Account, Backpack, and Task"""
 
 import datetime
+from Model import rpg_database as db
 
 class Player:
     def __init__(self, email, username, password):
@@ -15,6 +16,9 @@ class Player:
         self.perception = 0
         self.intelligence = 0
         self.charisma = 0
+        db.add_new_player(email, username, password)
+        db.print_player_table()
+
 
     def add_to_experience(self, task):
         self.experience += int(task.taskvalue)
@@ -38,7 +42,7 @@ class Player:
             self.coins -= num_of_coins
 
     def level_up_player(self):
-        self.level += 1        
+        self.level += 1
 
 
 class CustomException:

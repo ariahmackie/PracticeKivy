@@ -1,8 +1,11 @@
+
+
+
 import string
 import re
 import random
-from Model.email import Email
-import rpg_database as db
+from Helpers.email import Email
+from Model import rpg_database as db
 
 def get_registered_player_via_username(username): #createaccount_login_forgot_password helpers
     player = db.find_players_with_feature("username", username)

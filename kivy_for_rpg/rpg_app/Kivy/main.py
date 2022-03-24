@@ -1,3 +1,9 @@
+import sys
+import os
+controller_directory = os.path.dirname(os.path.realpath(__file__))
+parent_directory = os.path.dirname(controller_directory)
+sys.path.append(parent_directory)
+
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
@@ -10,9 +16,9 @@ from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.lang import Builder
 from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
-from Model.helpers import login_helper as lh
+from Helpers import login_helper as lh
 from Model.player import Player
-from Model.helpers import dummy_players as dp
+from Helpers import dummy_players as dp
 from kivy.graphics import Rectangle, Color
 from kivy.factory import Factory
 from kivy.uix.dropdown import DropDown
@@ -21,12 +27,18 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.picker import MDDatePicker
 from kivymd.uix.boxlayout import MDBoxLayout
 from datetime import datetime
+from Model import rpg_database as db
+
+db.drop_all_tables()
+db.create_all_tables()
 
 
 Window.size = (400,800)
 player1 = dp.create_test_user1()
 player2 = dp.create_test_user2()
 players = [player1, player2]
+
+
 
 class Login(Screen):
     pass
@@ -67,7 +79,7 @@ sm = ScreenManager(transition = NoTransition())
 sm.add_widget(Login(name='login'))
 sm.add_widget(Home(name='home'))
 
-class LoginApp(MDApp):
+class MainApp(MDApp):
     def build(self):
         self.sm = ScreenManager(transition = NoTransition())
         self.sm.add_widget(Login(name='login'))
@@ -80,6 +92,7 @@ class LoginApp(MDApp):
 
     def to_home(self):
         self.sm.current = 'home'
+
     def to_new_account(self):
         self.sm.current = 'newaccount'
 
@@ -180,4 +193,4 @@ class LoginApp(MDApp):
         DialogBox().show_calendar()
 
 if __name__ == "__main__":
-    LoginApp().run()
+    MainApp().run()
