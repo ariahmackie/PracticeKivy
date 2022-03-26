@@ -38,6 +38,7 @@ def get_player(id):
 def find_players_with_feature(feature_type, value):
     cursor.execute("SELECT * From player where %s=?" % feature_type, (value,))
     players = cursor.fetchall()
+    return players
 
 
 def get_value_from_player(value_type, player_id):

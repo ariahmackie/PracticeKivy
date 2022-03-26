@@ -36,8 +36,6 @@ db.create_all_tables()
 Window.size = (400,800)
 player1 = dp.create_test_user1()
 player2 = dp.create_test_user2()
-players = [player1, player2]
-
 
 
 class Login(Screen):
@@ -106,6 +104,7 @@ class MainApp(MDApp):
         self.sm.current = 'newtask'
 
     def create_new_user(self, username, email, password):
+        print("create new user")
         if self.is_valid_account(username, email, password):
             new_player = Player(email, username, password)
             self.player = new_player
@@ -113,50 +112,8 @@ class MainApp(MDApp):
         else:
             print("Did not make an account.")
 
-    def is_valid_account(self, username, email, password):
-        if self.is_available_username(username):
-            if self.is_available_email(email):
-                #if self.is_valid_email(email):
-                #    return True
-                return True
-        else:
-            return False
-
-    def is_available_username(self, username):
-        player = lh.get_registered_player_via_username(username, players)
-        if player == 0:
-            return True
-        print("username not available")
-        return False
-
-    def is_available_email(self, email):
-        player = lh.get_registered_player_via_email(email, players)
-        if player == 0:
-            return True
-        print("email already used")
-        return False
-
-    def is_valid_email(self, email):
-        rx =  r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' # from https://www.geeksforgeeks.org/check-if-email-ress-valid-or-not-in-python/
-        if re.fullmatch(rx, email):
-            return True
-        print("not a valid email")
-        return False
-
-    def read_login_input(self,email, password):
-        self.validate_password(email, password)
-
-    def validate_password(self, email, password):
-        player = lh.get_registered_player_via_email(email, players)
-        if player != 0:
-            print(player)
-            if lh.is_correctpassword(player, password):
-                self.sm.current = "home"
-            else:
-                print("incorrect password")
-                self.password_error_message()
-        else:
-            print("alert. Is not registered email.")
+    def authenticate_login(self, email, password):
+        pass
 
     def password_error_message(self):
         warning = Label(text = '[color=ff3333]Wrong password.[/color]', markup = True, pos = (270, 270), size = (50, 50), size_hint = (None, None)  )

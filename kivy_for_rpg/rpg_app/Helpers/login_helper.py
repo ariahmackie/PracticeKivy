@@ -8,10 +8,10 @@ from Helpers.email import Email
 from Model import rpg_database as db
 
 # For Creating Accounts
-def is_valid_for_new_account(username, email, password):
-    if self.is_available_username(username):
-        if self.is_available_email(email) && is_valid_email(email):
-            if is_valid_password(password):
+def is_valid_new_acount_info(username, email, password):
+    if is_available_username(username):
+        if is_available_email(email) and is_valid_new_email(email):
+            if is_valid_new_password(password):
                 return True
     return False
 
@@ -27,14 +27,14 @@ def is_available_email(email):
         return True
     return False
 
-def is_valid_email(email):
+def is_valid_new_email(email):
     rx =  r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b' # from https://www.geeksforgeeks.org/check-if-email-ress-valid-or-not-in-python/
     if re.fullmatch(rx, email):
         return True
     print("not a valid email")
     return False
 
-def is_valid_password(password):
+def is_valid_new_password(password):
     pass
 
 # for Logging in
@@ -44,25 +44,28 @@ def validate_email_and_password(email, password):
     if player != 0:
         print(player)
         if lh.is_correctpassword(player, password):
+            print("fill out later")
         else:
             print("incorrect password")
-            self.password_error_message()
+            password_error_message()
     else:
         print("alert. Is not registered email.")
 
 
 # Retrieve Current User Info
 def get_registered_player_via_username(username): #createaccount_login_forgot_password helpers
+    print("get_registered_player_via_username")
     player = db.find_players_with_feature("username", username)
+    db.print_player_table()
     if player is None:
         return 0
-    player_id = player[0]
+    player_id = player[0][0]
     return player_id
 
 def get_registered_player_via_email(email): #createaccount_login_forgot_password helpers
     return True
 
-def is_correctpassword(CURRENT_PLAYER, password): #createaccount_login_forgot_password helpers
+def is_correct_password_for_current_player(CURRENT_PLAYER, password): #createaccount_login_forgot_password helpers
     if CURRENT_PLAYER.player_account.password == password:
         return True
     else:

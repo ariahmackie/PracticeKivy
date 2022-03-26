@@ -67,7 +67,7 @@
             background_color: 0.40, 1, 1, 1
             color: 0, 0, 0, 1
             on_release:
-                #app.read_login_input(email.text, password.text)
+                #authenticate_login(email.text, password.text)
                 app.to_home()
         MDTextButton:
             text: "Forgot password?"
@@ -166,7 +166,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source: 'list.png'
+                source: '../Images/list.png'
 
 # user image
     Widget:

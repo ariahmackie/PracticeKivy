@@ -17,7 +17,7 @@ class Player:
         self.intelligence = 0
         self.charisma = 0
         db.add_new_player(email, username, password)
-        db.print_player_table()
+        
 
 
     def add_to_experience(self, task):
