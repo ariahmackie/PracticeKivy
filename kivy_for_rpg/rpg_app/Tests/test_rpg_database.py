@@ -35,6 +35,13 @@ class TestPlayerTable(unittest.TestCase):
         self.assertEqual(expected_tuple, actual_tuple, "tuples should be the same")
         self.drop_tables()
 
+    def test_find_players_with_feature(self):
+        self.set_up_player()
+        actual_person = rpg.find_players_with_feature("username", "Ashley")  # search a name that isn't in the database
+        expected_person = None
+        self.assertEqual(actual_person, expected_person, "should return nothing because 'Ashley' is not in the database")
+        
+
     def test_get_value_from_player(self):
         self.set_up_player()
         actual_email = rpg.get_value_from_player("email", 1)

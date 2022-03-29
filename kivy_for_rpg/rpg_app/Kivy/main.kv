@@ -14,11 +14,11 @@
             Ellipse:
                 pos: self.center_x - 130, self.center_y - 130
                 size: 260, 260
-                source: 'purplegradient.png'
+                source: '../Images/purplegradient.png'
             Rectangle:
                 pos: self.center_x - 70, self.center_y - 70
                 size: 140, 140
-                source: 'sword.png'
+                source: '../Images/sword.png'
     Widget:
         pos_hint: {'x': 0, 'y' : 0}
         size_hint: 1, 0.6
@@ -67,7 +67,7 @@
             background_color: 0.40, 1, 1, 1
             color: 0, 0, 0, 1
             on_release:
-                #app.read_login_input(email.text, password.text)
+                #authenticate_login(email.text, password.text)
                 app.to_home()
         MDTextButton:
             text: "Forgot password?"
@@ -140,7 +140,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source: "purplegradient3.png"
+                source: "../Images/purplegradient3.png"
 
 
 
@@ -154,7 +154,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source: "purplegradient3.png"
+                source: "../Images/purplegradient3.png"
 
     # menu button
     Widget:
@@ -166,7 +166,7 @@
             Rectangle:
                 pos: self.pos
                 size: self.size
-                source: 'list.png'
+                source: '../Images/list.png'
 
 # user image
     Widget:
@@ -189,11 +189,11 @@
                 pos: self.pos
                 size: self.size
             Rectangle:
-                source: "heart.png"
+                source: "../Images/heart.png"
                 pos: self.x + 5, self.y + 110
                 size:40, 35
             Rectangle:
-                source: "star.png"
+                source: "../Images/star.png"
                 pos: self.x + 5, self.y + 40
                 size: 40, 40
 
@@ -250,17 +250,17 @@
                 spacing: 3
                 size_hint_y: None
                 Button:
-                    background_normal: 'checklist.png'
+                    background_normal: '../Images/checklist.png'
                     background_color: 1, 1, 1, 1
-                    background_down: 'checklist.png'
+                    background_down: '../Images/checklist.png'
                     size_hint_y: None
                     height: 77
                     text: "a"
                     font_size: 24
                     color: 0.349, 0.298, 0.722
                 Button:
-                    background_normal: 'checklist.png'
-                    background_down: 'checklist.png'
+                    background_normal: '../Images/checklist.png'
+                    background_down: '../Images/checklist.png'
                     background_color: 1, 1, 1, 1
                     size_hint_y: None
                     height: 77
@@ -268,17 +268,17 @@
                     font_size: 24
                     color: 0.349, 0.298, 0.722
                 Button:
-                    background_normal: 'checklist.png'
+                    background_normal: '../Images/checklist.png'
                     background_color: 1, 1, 1, 1
-                    background_down: 'checklist.png'
+                    background_down: '../Images/checklist.png'
                     size_hint_y: None
                     height: 77
                     text: "a"
                     font_size: 24
                     color: 0.349, 0.298, 0.722
                 Button:
-                    background_normal: 'checklist.png'
-                    background_down: 'checklist.png'
+                    background_normal: '../Images/checklist.png'
+                    background_down: '../Images/checklist.png'
                     background_color: 1, 1, 1, 1
                     size_hint_y: None
                     height: 77
@@ -286,17 +286,17 @@
                     font_size: 24
                     color: 0.349, 0.298, 0.722
                 Button:
-                    background_normal: 'checklist.png'
+                    background_normal: '../Images/checklist.png'
                     background_color: 1, 1, 1, 1
-                    background_down: 'checklist.png'
+                    background_down: '../Images/checklist.png'
                     size_hint_y: None
                     height: 77
                     text: "a"
                     font_size: 24
                     color: 0.349, 0.298, 0.722
                 Button:
-                    background_normal: 'checklist.png'
-                    background_down: 'checklist.png'
+                    background_normal: '../Images/checklist.png'
+                    background_down: '../Images/checklist.png'
                     background_color: 1, 1, 1, 1
                     size_hint_y: None
                     height: 77

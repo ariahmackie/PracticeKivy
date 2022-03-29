@@ -35,6 +35,12 @@ def get_player(id):
     player = cursor.fetchone()
     return player
 
+def find_players_with_feature(feature_type, value):
+    cursor.execute("SELECT * From player where %s=?" % feature_type, (value,))
+    players = cursor.fetchall()
+    return players
+
+
 def get_value_from_player(value_type, player_id):
     command = "SELECT %s FROM Player WHERE id=?" % value_type
     cursor.execute(command, (player_id,))
@@ -247,7 +253,7 @@ def complete_task(task_id):
     cursor.execute("SELECT value FROM Tasks WHERE id=?", (task_id,))
     value = cursor.fetchone()[0]
     player_id = get_playerid_from_taskid(task_id)
-    
+
 
 def get_playerid_from_taskid(task_id):
     cursor.execute("SELECT player_id FROM Tasks WHERE id=?", (task_id,))
