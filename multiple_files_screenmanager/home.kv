@@ -1,4 +1,9 @@
-<Home@BoxLayout>:
-	Button:
+<HomeWindow>:
+	name: "homewindow"
+	Label:
 		text: "Home"
-
+	Button:
+		text: "Go back"
+		on_release:
+			app.root.current = "login"
+			
